@@ -36,16 +36,21 @@
 
             #region Part 3, playing with int value
             int value = 26;
+            Console.WriteLine(value);
             value++;
+            Console.WriteLine(value);
             value--;
-
+            Console.WriteLine(value);
             value += 5;
+            Console.WriteLine(value);
             value -= 3;
+            Console.WriteLine(value);
             value *= 2;
+            Console.WriteLine(value);
             value /= 3;
+            Console.WriteLine(value);
             #endregion
 
-            
         }
     }
 }
