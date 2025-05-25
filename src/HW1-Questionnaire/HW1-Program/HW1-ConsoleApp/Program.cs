@@ -51,17 +51,27 @@
             //Console.WriteLine(value);
             //#endregion
 
-            #region Part 4, float and byte
-            float firstvalue = 10152466.25f;
-            byte memory = 5;
+            //#region Part 4, float and byte
+            //float firstvalue = 10152466.25f;
+            //byte memory = 5;
 
-            float number = memory + firstvalue;
+            //float number = memory + firstvalue;
 
-            Console.WriteLine(number);
+            //Console.WriteLine(number);
 
+            //#endregion
+
+            #region Part 5, Comment and hour
+
+            //Hello this is a comment in C#
+
+            /*
+             * This is time in my compu now
+             */
+            DateTime time = DateTime.Now;
+            Console.WriteLine(time.ToString("f"));
             #endregion
 
-            
         }
     }
 }
