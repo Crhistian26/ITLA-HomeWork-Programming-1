@@ -33,6 +33,19 @@
 
             //nameProgram = "Hello";
             #endregion
+
+            #region Part 3, playing with int value
+            int value = 26;
+            value++;
+            value--;
+
+            value += 5;
+            value -= 3;
+            value *= 2;
+            value /= 3;
+            #endregion
+
+            
         }
     }
 }
