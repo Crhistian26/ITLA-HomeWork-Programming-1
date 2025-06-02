@@ -4,25 +4,33 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("insert one number:");
-      
-            try
+            bool finish = false;
+            do
             {
-                int number = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine($"your number is {number}");
-                if(number %  2 == 0)
+                Console.WriteLine("insert one number:");
+
+                try
                 {
-                    Console.WriteLine("Is Pair");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"your number is {number}");
+                    if (number % 2 == 0)
+                    {
+                        Console.WriteLine("Is Pair");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not is Pair");
+                    }
+                    finish = true;
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Not is Pair");
+                    Console.WriteLine("You can't insert other value, except numbers");
+                    Console.WriteLine("Press one key for continue...");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("You can't insert other value, except numbers");
-            }
+            }while (!finish);
         }
     }
 }
