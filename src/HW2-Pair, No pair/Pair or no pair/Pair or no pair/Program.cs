@@ -4,24 +4,24 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Ingresa un numero");
+            Console.WriteLine("insert one number:");
       
             try
             {
                 int number = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(number);
+                Console.WriteLine($"your number is {number}");
                 if(number %  2 == 0)
                 {
-                    Console.WriteLine("Tu numero es par");
+                    Console.WriteLine("Is Pair");
                 }
                 else
                 {
-                    Console.WriteLine("Tu numero no es par");
+                    Console.WriteLine("Not is Pair");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No ingresaste un numero");
+                Console.WriteLine("You can't insert other value, except numbers");
             }
         }
     }
