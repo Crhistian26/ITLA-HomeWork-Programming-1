@@ -14,7 +14,7 @@ namespace ContactsApp.App
             new Contact(2,"Henrique","Carrasco","8490987685" ,"Federico Guzman","Carrasco@gmail.com",23,false)
         };
 
-        #region Metodos para obtener datos
+        #region Methods for get data
         static int PresentationApp()
         {
             int choice = 0; bool i = false;
@@ -232,23 +232,40 @@ namespace ContactsApp.App
 
                 switch (choicePresentation)
                 {
+                    //Show Contacts
                     case 1:
+                        StartView(ConsoleColor.Magenta, "Ver contactos.");
+                        if (contacts.Count == 0)
+                        {
+                            Console.WriteLine("No tienes contactos registrados aun. \n\n");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < contacts.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
+                            }
+                        }
 
+                        resetMain = FinishView("Gracias por ver los contactos");
                         break;
-
+                    //Search Contact
                     case 2:
 
                         break;
-
+                    //Add Contact
                     case 3:
 
                         break;
+                    //Update Contact
                     case 4:
                         
                         break;
+                    //Delete Contact
                     case 5:
                        
                         break;
+                    //Close app
                     case 0:
                        
                         break;
