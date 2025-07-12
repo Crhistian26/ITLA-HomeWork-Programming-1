@@ -87,6 +87,25 @@ namespace ContactsApp.App
             }
         }
 
+        static string GetString(string petition)
+        {
+            while (true)
+            {
+                Console.WriteLine(petition);
+                string s = Console.ReadLine();
+
+                if (s.Trim() == "")
+                {
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                return s;
+            }
+        }
+
+
         #endregion
         static void Main(string[] args)
         {
