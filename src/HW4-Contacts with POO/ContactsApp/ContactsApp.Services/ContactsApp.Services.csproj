@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ContactsApp.Domain\ContactsApp.Domain.csproj" />
+    <ProjectReference Include="..\ContactsApp.Infraestructure\ContactsApp.Infraestructure.csproj" />
+  </ItemGroup>
+
 </Project>
