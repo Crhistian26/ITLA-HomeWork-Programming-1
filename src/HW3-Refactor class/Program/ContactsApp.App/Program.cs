@@ -104,7 +104,60 @@ namespace ContactsApp.App
                 return s;
             }
         }
+        static int GetInt(string petition)
+        {
+            while (true)
+            {
+                Console.WriteLine(petition);
+                string s = Console.ReadLine();
 
+                if (s.Trim() == "")
+                {
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (!int.TryParse(s, out int value))
+                {
+                    Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                return Convert.ToInt32(s);
+            }
+        }
+        static int GetInt(string petition, int length)
+        {
+            while (true)
+            {
+                Console.WriteLine(petition);
+                string s = Console.ReadLine();
+
+                if (s.Trim() == "")
+                {
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (!int.TryParse(s, out int value))
+                {
+                    Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (value > length || value < 1)
+                {
+                    Console.WriteLine("\nPorfavor debes ingresar un numero que este dentro de el rango.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+                return Convert.ToInt32(s);
+            }
+        }
 
         #endregion
         static void Main(string[] args)
