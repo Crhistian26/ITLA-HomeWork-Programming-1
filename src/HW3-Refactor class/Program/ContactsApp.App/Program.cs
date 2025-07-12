@@ -249,9 +249,74 @@ namespace ContactsApp.App
 
                         resetMain = FinishView("Gracias por ver los contactos");
                         break;
+
+
                     //Search Contact
                     case 2:
+                        bool confirm = false;
+                        int choiceContact;
+                        do
+                        {
+                            StartView(ConsoleColor.DarkCyan, "Detalles de contacto.");
+                            if (contacts.Count == 0)
+                            {
+                                Console.WriteLine("Lo sentimos esa opcion no esta disponible ya que no dispone de contactos todavia");
 
+                                resetMain = FinishView("Gracias por ver los detalles.");
+                                confirm = false;
+                                continue;
+                            }
+                            else
+                            {
+                                for (int i = 0; i < contacts.Count; i++)
+                                {
+                                    Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
+                                }
+                            }
+
+                            Console.WriteLine("Elige un numero para ver los detalles:");
+                            string f = Console.ReadLine();
+
+                            if (int.TryParse(f, out choiceContact) && choiceContact <= contacts.Count && choiceContact > 0)
+                            {
+                                Console.Clear();
+                                Contact c = contacts[choiceContact - 1];
+                                Console.WriteLine("Nombre: " + c.Name);
+                                Console.WriteLine("Apellido: " + c.LastName);
+                                Console.WriteLine("Numero: " + c.Phone);
+                                Console.WriteLine("Direccion: " + c.Address);
+                                Console.WriteLine("Correo: " + c.Email);
+                                Console.WriteLine("Edad: " + c.Age);
+                                if (c.BestFriends == true)
+                                {
+                                    Console.WriteLine("Es tu pana fiel.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No es tu pana fiel");
+                                }
+
+                                resetMain = FinishView("Gracias por ver los detalles");
+                                continue;
+                            }
+
+                            else
+                            {
+                                if (int.TryParse(f, out choiceContact))
+                                {
+                                    Console.WriteLine("Deberia de elegir un numero entre el rango de sus contactos.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Deberia poner un valor numerico.");
+                                }
+
+                                Console.WriteLine("Presione cualquier tecla para continuar.");
+                                Console.ReadKey();
+                                confirm = true;
+                                continue;
+                            }
+                        } while (confirm);
                         break;
                     //Add Contact
                     case 3:
