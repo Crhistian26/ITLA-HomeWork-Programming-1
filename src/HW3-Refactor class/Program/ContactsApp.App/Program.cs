@@ -57,6 +57,36 @@ namespace ContactsApp.App
 
             return choice;
         }
+
+        static void StartView(ConsoleColor color, string nameView)
+        {
+            Console.Clear();
+            Console.ForegroundColor = color;
+            Console.WriteLine(nameView + "\n");
+        }
+        static bool FinishView(string finishMessage)
+        {
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nQuieres seguir en la app o cerrarla?\nPresione el numero 1 para seguir y presionar cualquier otro numero o letra es un no.");
+                string a = Console.ReadLine();
+
+                if (a.Trim() != "1")
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(finishMessage);
+                    Console.WriteLine("Presione cualquier otra tecla para cerrar el programa.");
+                    Console.ReadKey();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
         #endregion
         static void Main(string[] args)
         {
