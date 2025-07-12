@@ -461,10 +461,31 @@ namespace ContactsApp.App
                             resetMain = FinishView("Gracias por modificar los contactos");
                         }
                         break;
-                        break;
+
+
                     //Delete Contact
                     case 5:
-                       
+                        StartView(ConsoleColor.DarkRed, "Eliminar contacto: ");
+                        if (contacts.Count == 0)
+                        {
+                            Console.WriteLine("No tienes contactos registrados aun asi que esta opcion no esta disponibles. \n\n");
+                        }
+                        else
+                        {
+                            int IdContact = 0;
+                            for (int i = 0; i < contacts.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
+                            }
+                            IdContact = GetInt("Porfavor ingresa el contacto a eliminar: ", contacts.Count);
+                            bool confDelete = GetBool($"Estas seguro de eliminar el contacto {contacts[IdContact - 1].Name}?");
+
+                            if (confDelete)
+                            {
+                                contacts.Remove(contacts[IdContact - 1]);
+                            }
+                        }
+                        resetMain = FinishView("Gracias por eliminar contactos.");
                         break;
                     //Close app
                     case 0:
