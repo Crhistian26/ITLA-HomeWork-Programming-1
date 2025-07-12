@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactsApp.Domain.Interfaces
 {
-    internal interface IEntity
+    public interface IEntity
     {
         int ID { get; set; }
     }
