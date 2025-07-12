@@ -318,8 +318,25 @@ namespace ContactsApp.App
                             }
                         } while (confirm);
                         break;
+
+
                     //Add Contact
                     case 3:
+                        StartView(ConsoleColor.DarkGreen, "Agregar contactos: ");
+                        Console.WriteLine("Porfavor llena correctamente los campos solicitados: ");
+                        string n = GetString("Ingresa el nombre: ");
+                        string ln = GetString("Ingresa el apellido: ");
+                        string p = GetPhoneNumber("Ingresa el numero: ");
+                        string ad = GetString("Ingresa su direccion: ");
+                        string em = GetString("Ingresa su EMAIL: ");
+                        int ag = GetInt("Ingresa su edad: ");
+                        bool bf = GetBool("El es pana fiel tuyo o no?");
+
+                        Contact contact = new Contact(contacts.Count + 1, n, ln, p, ad, em, ag, bf);
+
+                        contacts.Add(contact);
+
+                        resetMain = FinishView("Gracias por agregar un contacto.");
 
                         break;
                     //Update Contact
