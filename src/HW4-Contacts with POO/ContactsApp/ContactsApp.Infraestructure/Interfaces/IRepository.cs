@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace ContactsApp.Infraestructure.Interfaces
 {
-    internal interface IRepository<T> where T : class, IEntity
+    public interface IRepository<T> where T : class, IEntity
     {
-        public T Get();
+        public T GetByName(string name);
         public List<T> GetAll();
         public T GetById(int id);
         public bool Add(T entity);
         public bool Update(T entity);
-        public bool Delete(T entity);
-
-        public bool DeleteById(int id);
+        public bool Delete(int id);
           
     }
 }

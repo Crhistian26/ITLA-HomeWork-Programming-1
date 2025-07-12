@@ -7,7 +7,7 @@ namespace ContactsApp.Infraestructure.Repositorys
     {
         public ContactRepository() { }
 
-        public Contact Get()
+        public Contact GetByName(string name)
         {
             return null;
         }
