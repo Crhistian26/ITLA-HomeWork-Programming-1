@@ -198,6 +198,29 @@ namespace ContactsApp.App
             }
         }
 
+        static bool GetBool(string petition)
+        {
+            while (true)
+            {
+                Console.WriteLine(petition);
+                Console.Write("\nIngresa una S para SI y una N para NO: ");
+                string s = Console.ReadLine();
+                if (s.Trim().ToUpper() == "S")
+                {
+                    return true;
+                }
+                else if (s.Trim().ToUpper() == "N")
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("\nPorfavor ingresa S o N en mayuscula o minuscula, no se acepta otro valor al asignar el campo.");
+                }
+            }
+        }
+
+
         #endregion
         static void Main(string[] args)
         {
