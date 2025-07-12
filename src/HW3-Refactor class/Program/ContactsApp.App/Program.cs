@@ -159,6 +159,45 @@ namespace ContactsApp.App
             }
         }
 
+        static string GetPhoneNumber(string petition)
+        {
+            while (true)
+            {
+                Console.WriteLine(petition);
+                string s = Console.ReadLine();
+
+                if (s.Trim() == "")
+                {
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (!long.TryParse(s, out long value))
+                {
+                    Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (value < 0)
+                {
+                    Console.WriteLine("\nPorfavor no puedes poner numeros negativos.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (value < 1000000)
+                {
+                    Console.WriteLine("\nPorfavor no puedes poner numeros invalidos.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                return s;
+            }
+        }
+
         #endregion
         static void Main(string[] args)
         {
