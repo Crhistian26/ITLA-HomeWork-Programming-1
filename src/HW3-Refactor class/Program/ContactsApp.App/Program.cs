@@ -487,9 +487,19 @@ namespace ContactsApp.App
                         }
                         resetMain = FinishView("Gracias por eliminar contactos.");
                         break;
+
+
                     //Close app
                     case 0:
-                       
+                        bool choiceFinal = GetBool("Estas seguro de salir de la app?");
+                        if (choiceFinal)
+                        {
+                            resetMain = false;
+                        }
+                        else
+                        {
+                            resetMain = true;
+                        }
                         break;
                 }
             } while (resetMain);
