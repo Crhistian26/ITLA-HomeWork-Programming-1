@@ -339,9 +339,128 @@ namespace ContactsApp.App
                         resetMain = FinishView("Gracias por agregar un contacto.");
 
                         break;
+
+
                     //Update Contact
                     case 4:
-                        
+                        StartView(ConsoleColor.DarkCyan, "Modificar contactos: ");
+                        if (contacts.Count == 0)
+                        {
+                            Console.WriteLine("No tienes contactos registrados aun asi que esta opcion no esta disponibles. \n\n");
+                            resetMain = FinishView("Gracias por modificar contactos.");
+                        }
+                        else
+                        {
+                            int IdContact = 0;
+                            for (int i = 0; i < contacts.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
+                            }
+                            IdContact = GetInt("Porfavor ingresa el contacto a modificar: ", contacts.Count);
+                            bool resetQuestion = false;
+                            do
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Datos del contacto actual:");
+                                Contact c = contacts[IdContact - 1];
+                                Console.WriteLine("Nombre: " + c.Name);
+                                Console.WriteLine("Apellido: " + c.LastName);
+                                Console.WriteLine("Numero: " + c.Phone);
+                                Console.WriteLine("Direccion: " + c.Address);
+                                Console.WriteLine("Correo: " + c.Email);
+                                Console.WriteLine("Edad: " + c.Age);
+                                if (c.BestFriends == true)
+                                {
+                                    Console.WriteLine("Es tu pana fiel.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No es tu pana fiel");
+                                }
+
+
+                                Contact updateContact = contacts[IdContact - 1];
+
+                                Console.WriteLine("\nDime que quieres modificar: ");
+                                Console.WriteLine("1)Nombre   2)Apellido   3)Numero  4)Direccion   5)Correo   6)Edad   7)Si es pana fiel");
+                                int choice = GetInt("Ingresa tu decision: ", 7);
+
+                                if (choice == 1)
+                                {
+                                    Console.WriteLine("Su nombre actual es: " + updateContact.Name);
+                                    string name = GetString("Ingresa su nuevo nombre: ");
+                                    updateContact.Name = name;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 2)
+                                {
+                                    Console.WriteLine("Su apellido actual es: " + updateContact.LastName);
+                                    string lastname = GetString("Ingresa su nuevo apellido: ");
+                                    updateContact.LastName = lastname;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 3)
+                                {
+                                    Console.WriteLine("Su numero actual es: " + updateContact.Phone);
+                                    string phone = GetPhoneNumber("Ingresa su nuevo numero: ");
+                                    updateContact.Phone = phone;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 4)
+                                {
+                                    Console.WriteLine("Su direccion actual es: " + updateContact.Address);
+                                    string address = GetString("Ingresa su nueva direccion: ");
+                                    updateContact.Address = address;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 5)
+                                {
+                                    Console.WriteLine("Su correo actual es: " + updateContact.Email);
+                                    string email = GetString("Ingresa su nuevo correo: ");
+                                    updateContact.Email = email;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 6)
+                                {
+                                    Console.WriteLine("Su edad actual es: " + updateContact.Age);
+                                    int age = GetInt("Ingresa su edad: ");
+                                    updateContact.Age = age;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+
+                                if (choice == 7)
+                                {
+                                    bool bestFriends = updateContact.BestFriends;
+                                    string message = bestFriends ? "El es pana tuyo fiel" : "El es un pana normal";
+                                    Console.WriteLine(message);
+                                    bestFriends = GetBool("Es tu pana fiel? ");
+                                    updateContact.BestFriends = bestFriends;
+                                    contacts[IdContact - 1] = updateContact;
+                                    resetQuestion = GetBool("Quieres seguir modificando el contacto?");
+                                    continue;
+                                }
+                            } while (resetQuestion);
+
+                            resetMain = FinishView("Gracias por modificar los contactos");
+                        }
+                        break;
                         break;
                     //Delete Contact
                     case 5:
