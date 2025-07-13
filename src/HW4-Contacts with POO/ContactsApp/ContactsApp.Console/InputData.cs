@@ -8,35 +8,79 @@ namespace ContactsApp.Visual
 {
     internal class InputData
     {
+        private ConsoleColor _color = Console.ForegroundColor;
         public InputData() { }
+        public void ColorError()
+        {
+            _color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+        public void ColorNormal()
+        {
+            Console.ForegroundColor = _color;
+        }
 
         public string GetString(string petition)
         {
             while (true)
             {
+                ColorNormal();
                 Console.WriteLine(petition);
                 string s = Console.ReadLine();
 
                 if (s.Trim() == "")
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
                 }
 
+                ColorNormal();
                 return s;
             }
         }
 
-        public int GetInt(string petition)
+        public string GetEmail(string petition)
         {
             while (true)
             {
+                ColorNormal();
                 Console.WriteLine(petition);
                 string s = Console.ReadLine();
 
                 if (s.Trim() == "")
                 {
+                    ColorError();
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if(s.Trim().Contains("@"))
+                {
+                    ColorError();
+                    Console.WriteLine("\nPorfavor debe ingresar un correo valido (uno que tenga @).");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                ColorNormal();
+                return s;
+            }
+        }
+        public int GetInt(string petition)
+        {
+            while (true)
+            {
+                ColorNormal();
+                Console.WriteLine(petition);
+                string s = Console.ReadLine();
+
+                if (s.Trim() == "")
+                {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
@@ -44,11 +88,13 @@ namespace ContactsApp.Visual
 
                 if (!int.TryParse(s, out int value))
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
                 }
 
+                ColorNormal();
                 return Convert.ToInt32(s);
             }
         }
@@ -56,11 +102,13 @@ namespace ContactsApp.Visual
         {
             while (true)
             {
+                ColorNormal();
                 Console.WriteLine(petition);
                 string s = Console.ReadLine();
 
                 if (s.Trim() == "")
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
@@ -68,6 +116,7 @@ namespace ContactsApp.Visual
 
                 if (!int.TryParse(s, out int value))
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
@@ -75,10 +124,13 @@ namespace ContactsApp.Visual
 
                 if (value > length || value < 1)
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor debes ingresar un numero que este dentro de el rango.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
                 }
+
+                ColorNormal();
                 return Convert.ToInt32(s);
             }
         }
@@ -87,11 +139,13 @@ namespace ContactsApp.Visual
         {
             while (true)
             {
+                ColorNormal();
                 Console.WriteLine(petition);
                 string s = Console.ReadLine();
 
                 if (s.Trim() == "")
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
@@ -99,6 +153,7 @@ namespace ContactsApp.Visual
 
                 if (!long.TryParse(s, out long value))
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
@@ -106,18 +161,21 @@ namespace ContactsApp.Visual
 
                 if (value < 0)
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner numeros negativos.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
                 }
 
-                if (value < 1000000)
+                if (value < 8091111111)
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner numeros invalidos.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
                     continue;
                 }
 
+                ColorNormal();
                 return s;
             }
         }
@@ -126,6 +184,7 @@ namespace ContactsApp.Visual
         {
             while (true)
             {
+                ColorNormal();
                 Console.WriteLine(petition);
                 Console.Write("\nIngresa una S para SI y una N para NO: ");
                 string s = Console.ReadLine();
@@ -139,7 +198,9 @@ namespace ContactsApp.Visual
                 }
                 else
                 {
+                    ColorError();
                     Console.WriteLine("\nPorfavor ingresa S o N en mayuscula o minuscula, no se acepta otro valor al asignar el campo.");
+                    continue;
                 }
             }
         }

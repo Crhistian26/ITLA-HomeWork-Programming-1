@@ -3,11 +3,13 @@ using ContactsApp.Infraestructure.Interfaces;
 using ContactsApp.Infraestructure.Repositorys;
 using ContactsApp.Services.Interfaces;
 using ContactsApp.Services.Services;
+using System.Drawing;
 
 namespace ContactsApp.Visual
 {
     internal class Program
     {
+        static ConsoleColor _color;
         static int PresentationApp()
         {
             int choice = 0; bool i = false;
@@ -79,7 +81,17 @@ namespace ContactsApp.Visual
             }
         }
 
-       
+        static void ColorError()
+        {
+            _color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+        static void ColorNormal()
+        {
+            Console.ForegroundColor = _color;
+        }
+
         static void Main(string[] args)
         {
             IRepository<Contact> _contactRepository = new ContactRepository();
@@ -101,6 +113,7 @@ namespace ContactsApp.Visual
                             StartView(ConsoleColor.Magenta, "Ver contactos.");
                             if (contacts.Count == 0)
                             {
+                                ColorError();
                                 Console.WriteLine("No tienes contactos registrados aun. \n\n");
                             }
                             else
@@ -111,6 +124,7 @@ namespace ContactsApp.Visual
                                 }
                             }
 
+                            ColorNormal();
                             resetMain = FinishView("Gracias por ver los contactos");
                             break;
                         }
@@ -123,11 +137,14 @@ namespace ContactsApp.Visual
 
                             do
                             {
+                                ColorNormal();
                                 StartView(ConsoleColor.DarkCyan, "Detalles de contacto.");
                                 if (contacts.Count == 0)
                                 {
+                                    ColorError();
                                     Console.WriteLine("Lo sentimos esa opcion no esta disponible ya que no dispone de contactos todavia");
 
+                                    ColorNormal();
                                     resetMain = FinishView("Gracias por ver los detalles.");
                                     confirm = false;
                                     continue;
@@ -145,7 +162,9 @@ namespace ContactsApp.Visual
 
                                 if (!int.TryParse(f, out choiceContact))
                                 {
+                                    ColorError();
                                     Console.WriteLine("Deberia de poner datos numericos");
+                                    ColorNormal();
                                     Console.WriteLine("Presione cualquier tecla para continuar.");
                                     Console.ReadKey();
                                     confirm = true;
@@ -156,7 +175,9 @@ namespace ContactsApp.Visual
 
                                 if (!_service.VerifyId(choiceContact))
                                 {
+                                    ColorError();
                                     Console.WriteLine("Lo sentimos pero no existe un contacto con ese id");
+                                    ColorNormal();
                                     Console.WriteLine("Presione cualquier tecla para continuar.");
                                     Console.ReadKey();
                                     confirm = true;
@@ -182,6 +203,7 @@ namespace ContactsApp.Visual
                                 }
 
                                 resetMain = FinishView("Gracias por ver los detalles");
+                                confirm = false;
                                 continue;
                                
                             } while (confirm);
@@ -210,7 +232,9 @@ namespace ContactsApp.Visual
                         }
                         catch(Exception ex)
                         {
+                            ColorError();
                             Console.WriteLine($"Hubo un error en la aplicacion: {ex.Message}");
+                            ColorNormal();
                             resetMain = FinishView("Aun quieres seguir?");
                             break;
                         }
