@@ -10,7 +10,7 @@ using ContactsApp.Domain.Entitys;
 
 namespace ContactsApp.Services.Services
 {
-    internal class ContactService : IContactService
+    public class ContactService : IContactService
     {
         private readonly IRepository<Contact> _contactRepository;
 
