@@ -61,10 +61,10 @@ namespace ContactsApp.Visual
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\nQuieres seguir en la app o cerrarla?\nPresione el numero 1 para seguir y presionar cualquier otro numero o letra es un no.");
+                Console.WriteLine("\nQuieres seguir en la app o cerrarla?\nPresione el numero 0 para CERRAR y presionar cualquier otro numero o letra es para continuar en la app.");
                 string a = Console.ReadLine();
 
-                if (a.Trim() != "1")
+                if (a.Trim() == "0")
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(finishMessage);
@@ -120,6 +120,7 @@ namespace ContactsApp.Visual
                             List<Contact> contacts = _service.GetAllContacts();
                             bool confirm = false;
                             int choiceContact;
+
                             do
                             {
                                 StartView(ConsoleColor.DarkCyan, "Detalles de contacto.");
@@ -135,53 +136,54 @@ namespace ContactsApp.Visual
                                 {
                                     for (int i = 0; i < contacts.Count; i++)
                                     {
-                                        Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
+                                        Console.WriteLine($"{contacts[i].ID}){contacts[i].Name} {contacts[i].LastName}");
                                     }
                                 }
 
                                 Console.WriteLine("Elige un numero para ver los detalles:");
                                 string f = Console.ReadLine();
 
-                                if (int.TryParse(f, out choiceContact) && choiceContact <= contacts.Select(c => c.ID).Last() && choiceContact > 0)
+                                if (!int.TryParse(f, out choiceContact))
                                 {
-                                    Console.Clear();
-                                    Contact c = _service.GetContact(choiceContact);
-                                    Console.WriteLine("Id: " + c.ID);
-                                    Console.WriteLine("Nombre: " + c.Name);
-                                    Console.WriteLine("Apellido: " + c.LastName);
-                                    Console.WriteLine("Numero: " + c.Phone);
-                                    Console.WriteLine("Direccion: " + c.Address);
-                                    Console.WriteLine("Correo: " + c.Email);
-                                    Console.WriteLine("Edad: " + c.Age);
-                                    if (c.BestFriends == true)
-                                    {
-                                        Console.WriteLine("Es tu pana fiel.");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("No es tu pana fiel");
-                                    }
-
-                                    resetMain = FinishView("Gracias por ver los detalles");
-                                    continue;
-                                }
-
-                                else
-                                {
-                                    if (int.TryParse(f, out choiceContact))
-                                    {
-                                        Console.WriteLine("Deberia de elegir un numero entre el rango de sus contactos.");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Deberia poner un valor numerico.");
-                                    }
-
+                                    Console.WriteLine("Deberia de poner datos numericos");
                                     Console.WriteLine("Presione cualquier tecla para continuar.");
                                     Console.ReadKey();
                                     confirm = true;
                                     continue;
                                 }
+
+                                choiceContact = Convert.ToInt32(f);
+
+                                if (!_service.VerifyId(choiceContact))
+                                {
+                                    Console.WriteLine("Lo sentimos pero no existe un contacto con ese id");
+                                    Console.WriteLine("Presione cualquier tecla para continuar.");
+                                    Console.ReadKey();
+                                    confirm = true;
+                                    continue;
+                                }
+
+                                Console.Clear();
+                                Contact c = _service.GetContact(choiceContact);
+                                Console.WriteLine("Id: " + c.ID);
+                                Console.WriteLine("Nombre: " + c.Name);
+                                Console.WriteLine("Apellido: " + c.LastName);
+                                Console.WriteLine("Numero: " + c.Phone);
+                                Console.WriteLine("Direccion: " + c.Address);
+                                Console.WriteLine("Correo: " + c.Email);
+                                Console.WriteLine("Edad: " + c.Age);
+                                if (c.BestFriends == true)
+                                {
+                                    Console.WriteLine("Es tu pana fiel.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No es tu pana fiel");
+                                }
+
+                                resetMain = FinishView("Gracias por ver los detalles");
+                                continue;
+                               
                             } while (confirm);
                             break;
                         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ContactsApp.Services.Interfaces
 {
-    internal interface IContactService
+    public interface IContactService
     { 
         Contact GetContact(int id);
         Contact GetContact(string name);
@@ -16,6 +16,8 @@ namespace ContactsApp.Services.Interfaces
         bool AddContact(Contact contact);
         bool UpdateContact(Contact contact);
         bool DeleteContact(int id);
+
+        bool VerifyId(int id);
 
     }
 }

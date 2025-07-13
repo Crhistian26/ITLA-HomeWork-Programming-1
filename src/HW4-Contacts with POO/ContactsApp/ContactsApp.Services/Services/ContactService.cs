@@ -80,6 +80,10 @@ namespace ContactsApp.Services.Services
             return _contactRepository.Delete(id);
         }
 
+        public bool VerifyId(int id)
+        {
+            return _contactRepository.VerifyId(id);
+        }
 
     }
 }

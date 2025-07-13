@@ -16,6 +16,7 @@ namespace ContactsApp.Infraestructure.Interfaces
         public bool Add(T entity);
         public bool Update(T entity);
         public bool Delete(int id);
+        public bool VerifyId(int id);
           
     }
 }

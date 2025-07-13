@@ -40,7 +40,7 @@ namespace ContactsApp.Infraestructure.Repositorys
 
         public bool Add(Contact c)
         {
-            c.ID = _contacts.FindLast(c=> c.Name != null).ID;
+            c.ID = _contacts.FindLast(c=> c.Name != null).ID + 1;
 
             if(c.ID < 0)
             {
@@ -76,6 +76,18 @@ namespace ContactsApp.Infraestructure.Repositorys
             }
 
             _contacts.RemoveAt(position);
+            return true;
+        }
+
+        public bool VerifyId(int Id)
+        {
+            int position = _contacts.FindIndex(0, c => c.ID == Id);
+
+            if(position < 0)
+            {
+                return false;
+            }
+
             return true;
         }
     }
