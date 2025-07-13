@@ -218,7 +218,7 @@ namespace ContactsApp.Visual
                             string ln = input.GetString("Ingresa el apellido: ");
                             string p = input.GetPhoneNumber("Ingresa el numero: ");
                             string ad = input.GetString("Ingresa su direccion: ");
-                            string em = input.GetString("Ingresa su EMAIL: ");
+                            string em = input.GetEmail("Ingresa su EMAIL: ");
                             int ag = input.GetInt("Ingresa su edad: ");
                             bool bf = input.GetBool("El es pana fiel tuyo o no?");
 
@@ -245,7 +245,9 @@ namespace ContactsApp.Visual
                             StartView(ConsoleColor.DarkCyan, "Modificar contactos: ");
                             if (contacts.Count == 0)
                             {
+                                ColorError();
                                 Console.WriteLine("No tienes contactos registrados aun asi que esta opcion no esta disponibles. \n\n");
+                                ColorNormal();
                                 resetMain = FinishView("Gracias por modificar contactos.");
                             }
                             else
@@ -255,7 +257,9 @@ namespace ContactsApp.Visual
                                 {
                                     Console.WriteLine($"{i + 1}){contacts[i].Name} {contacts[i].LastName}");
                                 }
+
                                 IdContact = input.GetInt("Porfavor ingresa el contacto a modificar: ", contacts.Count);
+
                                 bool resetQuestion = false;
                                 do
                                 {
@@ -363,6 +367,7 @@ namespace ContactsApp.Visual
                         }
                         catch (Exception ex)
                         {
+                            ColorError();
                             Console.WriteLine($"Hubo un error en la aplicacion: {ex.Message}");
                             resetMain = FinishView("Aun quieres seguir?");
                             break;

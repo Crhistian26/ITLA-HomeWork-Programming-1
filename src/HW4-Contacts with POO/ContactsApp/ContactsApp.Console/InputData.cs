@@ -25,7 +25,7 @@ namespace ContactsApp.Visual
         {
             while (true)
             {
-                ColorNormal();
+                _color = Console.ForegroundColor;
                 Console.WriteLine(petition);
                 string s = Console.ReadLine();
 
@@ -44,6 +44,7 @@ namespace ContactsApp.Visual
 
         public string GetEmail(string petition)
         {
+            _color = Console.ForegroundColor;
             while (true)
             {
                 ColorNormal();
@@ -58,7 +59,7 @@ namespace ContactsApp.Visual
                     continue;
                 }
 
-                if(s.Trim().Contains("@"))
+                if(!s.Trim().Contains("@"))
                 {
                     ColorError();
                     Console.WriteLine("\nPorfavor debe ingresar un correo valido (uno que tenga @).");
@@ -66,12 +67,14 @@ namespace ContactsApp.Visual
                     continue;
                 }
 
+
                 ColorNormal();
                 return s;
             }
         }
         public int GetInt(string petition)
         {
+            _color = Console.ForegroundColor;
             while (true)
             {
                 ColorNormal();
@@ -100,6 +103,7 @@ namespace ContactsApp.Visual
         }
         public int GetInt(string petition, int length)
         {
+            _color = Console.ForegroundColor;
             while (true)
             {
                 ColorNormal();
@@ -137,6 +141,7 @@ namespace ContactsApp.Visual
 
         public string GetPhoneNumber(string petition)
         {
+            _color = Console.ForegroundColor;
             while (true)
             {
                 ColorNormal();
@@ -182,6 +187,7 @@ namespace ContactsApp.Visual
 
         public bool GetBool(string petition)
         {
+            _color = Console.ForegroundColor;
             while (true)
             {
                 ColorNormal();
