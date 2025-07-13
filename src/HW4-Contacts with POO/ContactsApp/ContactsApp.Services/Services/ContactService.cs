@@ -20,11 +20,27 @@ namespace ContactsApp.Services.Services
         }
         public Contact GetContact(int id)
         {
-            return _contactRepository.GetById(id);
+            Contact c;
+            c = _contactRepository.GetById(id);
+
+            if (c == null)
+            {
+                throw new Exception("No existe un contacto con ese ID");
+            }
+
+            return c;
         }
         public Contact GetContact(string name)
         {
-            return _contactRepository.GetByName(name);
+            Contact c;
+            c = _contactRepository.GetByName(name);
+
+            if (c == null)
+            {
+                throw new Exception("No existe un contacto con ese nombre");
+            }
+
+            return c;
         }
         public List<Contact> GetAllContacts()
         {
@@ -32,14 +48,35 @@ namespace ContactsApp.Services.Services
         }
         public bool AddContact(Contact contact)
         {
+            if(_contactRepository.GetAll().Any(c => c.Name == contact.Name && c.LastName == contact.LastName))
+            {
+                throw new Exception("Ya existe un contacto con el mismo nombre y apellido");
+            }
+
+            if(_contactRepository.GetAll().Any(c => c.Email == contact.Email))
+            {
+                throw new Exception("Ya existe un contacto con el mismo apellido");
+            }
+
             return _contactRepository.Add(contact);
+
         }
         public bool UpdateContact(Contact contact)
         {
+            if(_contactRepository.GetById(contact.ID) == null)
+            {
+                throw new Exception("No existe un contacto con ese ID");
+            }
+
             return _contactRepository.Update(contact);
         }
         public bool DeleteContact(int id)
         {
+            if(_contactRepository.GetById(id) == null)
+            {
+                throw new Exception("No existe un contacto con ese ID");
+            }
+            
             return _contactRepository.Delete(id);
         }
 

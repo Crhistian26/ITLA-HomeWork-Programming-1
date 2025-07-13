@@ -42,7 +42,7 @@ namespace ContactsApp.Infraestructure.Repositorys
         {
             c.ID = _contacts.FindLast(c=> c.Name != null).ID;
 
-            if(c.ID > 0)
+            if(c.ID < 0)
             {
                 return false;
             }
@@ -53,16 +53,16 @@ namespace ContactsApp.Infraestructure.Repositorys
 
         }
 
-        public bool Update(Contact c)
+        public bool Update(Contact contact)
         {
-            int position = _contacts.FindIndex(0, c => c.ID == c.ID);
+            int position = _contacts.FindIndex(0, c => c.ID == contact.ID);
 
             if(position < 0)
             {
                 return false;
             }
 
-            _contacts[position] = c;
+            _contacts[position] = contact;
             return true;
 
         }
