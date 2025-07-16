@@ -16,7 +16,6 @@ namespace ContactsApp.Services.Interfaces
         bool AddContact(Contact contact);
         bool UpdateContact(Contact contact);
         bool DeleteContact(int id);
-
         bool VerifyId(int id);
 
     }
