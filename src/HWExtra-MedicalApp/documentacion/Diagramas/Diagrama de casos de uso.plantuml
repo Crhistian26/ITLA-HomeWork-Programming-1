@@ -1,0 +1,19 @@
+@startuml Diagrama de Flujo
+
+actor Medico
+
+package "Opciones" {
+    (Registar pacientes) #LightGreen
+    (Agendar consulta) #LightGreen
+    (Ver datos de pacientes) #LightBlue
+    (Realizar consulta,\neste agendada o no) #Violet
+    (Ver consultas anteriores) #LightBlue
+    (Visualizar historial\nde pacientes en especifico) #LightBlue
+    (Editar datos de los pacientes) #Violet
+    (Eliminar registros de pacientes\n y/o consultas previas) #Red
+}
+
+(Registrar acciones del actor Medico) <<include>> as back #LightSkyBlue
+back --> Opciones : <<Monitorea>>
+Medico -- Opciones
+@enduml
