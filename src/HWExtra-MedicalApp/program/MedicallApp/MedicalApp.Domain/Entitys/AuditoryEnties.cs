@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace MedicalApp.Domain.Entitys
 {
     public class AuditoryEnties
     {
+        [Key]
         public int Id { get; set; }
         public string NameTable { get; set; }
         public int IdTable { get; set; }
@@ -19,6 +21,8 @@ namespace MedicalApp.Domain.Entitys
         public string OldDate {  get; set; }
         public string NewDate { get; set; }
         public DateTime Date { get; set; }
+        public int UserId { get; set; }
+        [Required]
         public User User { get; set; }
         public AuditoryEnties() { }
         

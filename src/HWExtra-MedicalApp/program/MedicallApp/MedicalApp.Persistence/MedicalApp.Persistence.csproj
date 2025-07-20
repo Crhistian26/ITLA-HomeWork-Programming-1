@@ -24,4 +24,9 @@
     <ProjectReference Include="..\MedicalApp.Domain\MedicalApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

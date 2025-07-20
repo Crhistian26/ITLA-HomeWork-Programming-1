@@ -23,6 +23,9 @@ namespace MedicalApp.Domain.Entitys
         public int DoctorId { get; set; }
         public Doctor? Doctor { get; set; }
 
+        //Navegacion
+        public Consultation Consultation { get; set; }
+
         public User() { }
         public User(Rol rol, string username, string password, Doctor? doctor)
         {

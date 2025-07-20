@@ -5,10 +5,10 @@ using MedicalApp.Domain.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MedicalApp.Domain
+namespace MedicalApp.Domain.Entitys
 {
     [Table("Patients")]
-    public class Patient : Entity
+    public class Patient : IEntity
     {
         [Key]
         public int Id { get; set; }
