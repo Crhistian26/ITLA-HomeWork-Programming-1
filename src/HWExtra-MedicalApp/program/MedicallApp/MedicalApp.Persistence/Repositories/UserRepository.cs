@@ -10,6 +10,11 @@ namespace MedicalApp.Persistence.Repositories
         private readonly MedicalContext _context;
         public UserRepository(MedicalContext context) { _context = context; }
 
+        public User Login(string username, string password)
+        {
+            User data = _context.Users.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+            return data;
+        }
         public User GetById(int id)
         {
             User data = _context.Users.Where(x => x.Id == id).FirstOrDefault();

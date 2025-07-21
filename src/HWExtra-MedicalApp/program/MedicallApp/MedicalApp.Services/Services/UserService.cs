@@ -14,6 +14,16 @@ namespace MedicalApp.Services.Services
             _userRepository = userRepository;
         }
 
+        public User Login(string username, string password)
+        {
+            User user = _userRepository.Login(username, password);  
+            if(user == null)
+            {
+                throw new ExceptionServices($"Nombre de usuario y contraseña incorrect.");
+            }
+            return user;
+        }
+
         public User GetUserById(int id)
         {
             var user = _userRepository.GetById(id);

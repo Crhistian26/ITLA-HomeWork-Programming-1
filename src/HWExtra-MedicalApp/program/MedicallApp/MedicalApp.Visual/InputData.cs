@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactsApp.Visual
+namespace MedicalApp.Visual
 {
-    internal class InputData
+    public class InputData
     {
         private ConsoleColor _color = Console.ForegroundColor;
         public InputData() { }
@@ -35,6 +35,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -57,6 +58,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -65,6 +67,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor debe ingresar un correo valido (uno que tenga @).");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -87,6 +90,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -95,6 +99,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -116,6 +121,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -124,6 +130,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -132,6 +139,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor debes ingresar un numero que este dentro de el rango.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -154,6 +162,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -162,6 +171,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -170,6 +180,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner numeros negativos.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -178,6 +189,7 @@ namespace ContactsApp.Visual
                     ColorError();
                     Console.WriteLine("\nPorfavor no puedes poner numeros invalidos.\nPresiona una tecla para continuar.");
                     Console.ReadKey();
+                    ColorNormal();
                     continue;
                 }
 
@@ -207,6 +219,7 @@ namespace ContactsApp.Visual
                 {
                     ColorError();
                     Console.WriteLine("\nPorfavor ingresa S o N en mayuscula o minuscula, no se acepta otro valor al asignar el campo.");
+                    ColorNormal();
                     continue;
                 }
             }

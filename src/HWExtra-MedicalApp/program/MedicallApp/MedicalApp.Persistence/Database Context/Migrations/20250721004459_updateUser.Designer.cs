@@ -4,6 +4,7 @@ using MedicalApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalApp.Persistence.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    partial class MedicalContextModelSnapshot : ModelSnapshot
+    [Migration("20250721004459_updateUser")]
+    partial class updateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,6 +191,9 @@ namespace MedicalApp.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ConsultationId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
@@ -203,6 +209,8 @@ namespace MedicalApp.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConsultationId");
 
                     b.HasIndex("DoctorId")
                         .IsUnique()
@@ -265,9 +273,17 @@ namespace MedicalApp.Persistence.Migrations
 
             modelBuilder.Entity("MedicalApp.Domain.Entitys.User", b =>
                 {
+                    b.HasOne("MedicalApp.Domain.Entitys.Consultation", "Consultation")
+                        .WithMany()
+                        .HasForeignKey("ConsultationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MedicalApp.Domain.Entitys.Doctor", "Doctor")
                         .WithOne("User")
                         .HasForeignKey("MedicalApp.Domain.Entitys.User", "DoctorId");
+
+                    b.Navigation("Consultation");
 
                     b.Navigation("Doctor");
                 });

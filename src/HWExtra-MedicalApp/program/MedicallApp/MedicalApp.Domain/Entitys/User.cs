@@ -20,11 +20,9 @@ namespace MedicalApp.Domain.Entitys
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
-        public int DoctorId { get; set; }
-        public Doctor? Doctor { get; set; }
+        public int? DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
 
-        //Navegacion
-        public Consultation Consultation { get; set; }
 
         public User() { }
         public User(Rol rol, string username, string password, Doctor? doctor)
