@@ -17,6 +17,7 @@ namespace MedicalApp.Domain.Entitys
         public DateOnly Date { get; set; }
         public TimeOnly Begin { get; set; }
         public TimeOnly End { get; set; }
+        public bool Pending { get; set; }
         public int PatientId { get; set; }
         public Patient Patient { get; set; }
         public int DoctorId { get; set; }
@@ -26,11 +27,25 @@ namespace MedicalApp.Domain.Entitys
 
         public Consultation() { }
 
-        public Consultation(DateOnly date, TimeOnly begin, TimeOnly end, Patient patient, Doctor doctor, Reason reason, string? notes)
+        public Consultation(DateOnly date, TimeOnly begin, TimeOnly end,bool pending, Patient patient, Doctor doctor, Reason reason, string? notes)
         {
             Date = date;
             Begin = begin;
             End = end;
+            Pending = pending;
+            PatientId = patient.Id;
+            Patient = patient;
+            DoctorId = doctor.Id;
+            Doctor = doctor;
+            Reason = reason;
+            Notes = notes;
+        }
+
+        public Consultation(int id, DateOnly date, bool pending, Patient patient, Doctor doctor, Reason reason, string? notes)
+        {
+            Id = id;
+            Date = date;
+            Pending = pending;
             PatientId = patient.Id;
             Patient = patient;
             DoctorId = doctor.Id;

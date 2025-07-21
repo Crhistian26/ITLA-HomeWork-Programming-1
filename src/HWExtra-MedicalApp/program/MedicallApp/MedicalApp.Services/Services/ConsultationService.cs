@@ -17,23 +17,20 @@ namespace MedicalApp.Services.Services
         public Consultation GetConsultationById(int id)
         {
             var consultation = _consultationRepository.GetById(id);
-            if (consultation == null)
-            {
-                throw new ExceptionServices($"No se encontró una consulta con el ID {id}.");
-            }
             return consultation;
         }
 
         public List<Consultation> GetAllConsultations()
         {
             var consultations = _consultationRepository.GetAll();
-            if (consultations == null || consultations.Count == 0)
-            {
-                throw new ExceptionServices("No hay consultas registradas.");
-            }
             return consultations;
         }
 
+        public List<Consultation> GetConsultationsPending()
+        {
+            var consultations = _consultationRepository.GetConsultationsPending();
+            return consultations;
+        }
         public void AddConsultation(Consultation consultation)
         {
             if (consultation == null)
