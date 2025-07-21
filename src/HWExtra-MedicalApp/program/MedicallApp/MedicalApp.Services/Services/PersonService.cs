@@ -51,6 +51,7 @@ namespace MedicalApp.Services.Services
                 throw new ExceptionServices("La persona a agregar no puede ser nula.");
             }
             _personRepository.Add(person);
+            _personRepository._context.SaveChanges();
         }
 
         public void UpdatePerson(Person person)
@@ -60,6 +61,7 @@ namespace MedicalApp.Services.Services
                 throw new ExceptionServices("La persona a actualizar no puede ser nula.");
             }
             _personRepository.Update(person);
+            _personRepository._context.SaveChanges();
         }
 
         public void DeletePerson(int id)
@@ -70,5 +72,7 @@ namespace MedicalApp.Services.Services
                 throw new ExceptionServices($"No se puede eliminar. No existe una persona con el ID {id}.");
             }
             _personRepository.Delete(person);
+            _personRepository._context.SaveChanges();
         }
     }
+}

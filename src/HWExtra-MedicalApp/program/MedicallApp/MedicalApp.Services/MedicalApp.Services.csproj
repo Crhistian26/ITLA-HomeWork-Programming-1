@@ -20,4 +20,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MedicalApp.Domain\MedicalApp.Domain.csproj" />
+    <ProjectReference Include="..\MedicalApp.Persistence\MedicalApp.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

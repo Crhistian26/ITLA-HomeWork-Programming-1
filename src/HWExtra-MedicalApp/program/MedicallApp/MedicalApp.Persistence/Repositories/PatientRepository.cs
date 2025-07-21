@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MedicalApp.Persistence.Repositories
 {
-    internal class PatientRepository : IRepository<Patient>, IPersonRepository<Patient>
+    public class PatientRepository : IRepository<Patient>, IPersonRepository<Patient>
     {
         private readonly MedicalContext _context;
         public PatientRepository(MedicalContext context) { _context = context; }

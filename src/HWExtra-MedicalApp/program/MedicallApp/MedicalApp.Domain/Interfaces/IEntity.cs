@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MedicalApp.Domain.Interfaces
 {
-    public interface Entity
+    public interface IEntity
     {
         public AuditoryData GetAuditoryData();
     }

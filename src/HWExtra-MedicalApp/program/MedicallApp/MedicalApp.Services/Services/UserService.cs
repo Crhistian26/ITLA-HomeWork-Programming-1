@@ -62,3 +62,4 @@ namespace MedicalApp.Services.Services
             _userRepository.Delete(user);
         }
     }
+}

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MedicalApp.Domain.Entitys
 {
-    public class User : Entity
+    public class User : IEntity
     {
         [Key]
         public int Id { get; set; }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MedicalApp.Domain.Entitys
 {
     [Table("Consultations")]
-    public class Consultation : Entity
+    public class Consultation : IEntity
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }

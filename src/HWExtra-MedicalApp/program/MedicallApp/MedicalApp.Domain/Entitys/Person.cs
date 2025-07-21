@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MedicalApp.Domain.Entitys
 {
     [Table("Persons")]
-    public class Person : Entity
+    public class Person : IEntity
     {
         [Key]
         public int Id { get; set; }
