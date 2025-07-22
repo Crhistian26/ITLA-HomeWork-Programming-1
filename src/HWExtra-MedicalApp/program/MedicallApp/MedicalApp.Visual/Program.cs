@@ -6,6 +6,7 @@ using MedicalApp.Persistence;
 using MedicalApp.Persistence.Migrations;
 using MedicalApp.Persistence.Repositories;
 using MedicalApp.Services.Services;
+using MedicalApp.Visual.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Xml.Schema;
@@ -19,9 +20,14 @@ namespace MedicalApp.Visual
         static MedicalContext context = new MedicalContext(new DbContextOptionsBuilder<MedicalContext>().Options, new User());
         static UserRepository userRepository = new UserRepository(context);
         static UserService _userService = new UserService(userRepository);
+        static PersonRepository personRepository = new PersonRepository(context);
+        static PersonService _personService = new PersonService(personRepository);
+        static DoctorRepository doctorRepository = new DoctorRepository(context);
+        static DoctorService _doctorService = new DoctorService(doctorRepository);
         static ConsultationRepository consultationRepository = new ConsultationRepository(context);
         static ConsultationService _consultationService = new ConsultationService(consultationRepository);
 
+        static UserViews _userViews = new UserViews(inputs,_userService,_doctorService);
         static (int,int) BeginView()
         {
             var data = (0, 0);
@@ -32,8 +38,8 @@ namespace MedicalApp.Visual
                 Console.Clear();
                 Console.WriteLine($"Bienvenido a nuestra app medica {user.Username}");
                 Console.WriteLine("Porfavor digame que proceso quieres trabajar: ");
-                Console.WriteLine("1)Citas medicas  2)Datos de pacientes  3)Datos de medicos  4)Registros  5)Cerrar la app");
-                choice = inputs.GetInt("Elige a que proceso quieres ir: ", 5);
+                Console.WriteLine("1)Citas medicas  2)Datos de pacientes  3)Datos de medicos  4)Datos de usuarios  5)Registros  6)Cerrar la app");
+                choice = inputs.GetInt("Elige a que proceso quieres ir: ", 6);
                 data.Item1 = choice;
                 Console.Clear();
 
@@ -70,6 +76,16 @@ namespace MedicalApp.Visual
                         next = false;
                         break;
                     case 4:
+                        Console.WriteLine("Que quieres hacer con los usuarios?");
+                        Console.WriteLine("1)Ver todos los usuarios   2)Ver los detalles de un usuario   3)Agregar un usuario   4)Modificar un usuario   5)Eliminar un usuario   6)Volver atras");
+                        choice = inputs.GetInt("Elige que quieres hacer: ", 6);
+
+                        if (choice == 6) { next = true; continue; }
+
+                        data.Item2 = choice;
+                        next = false;
+                        break;
+                    case 5:
                         Console.WriteLine("Que quieres hacer con los registros?");
                         Console.WriteLine("1)Ver todos los registros del sistema  2)Ver todos los registros de un usuario  3)Volver atras");
                         choice = inputs.GetInt("Elige que quieres hacer: ", 3);
@@ -79,7 +95,7 @@ namespace MedicalApp.Visual
                         data.Item2 = choice;
                         next = false;
                         break;
-                    case 5:
+                    case 6:
                         Console.WriteLine("Fue un placer ayudarle.");
                         Console.WriteLine("Presione cualquier tecla para cerrar la app");
                         Console.ReadKey();
@@ -118,44 +134,25 @@ namespace MedicalApp.Visual
         static void Main(string[] args)
         {
             Console.ForegroundColor= ConsoleColor.White;
-            
-            #region Login
-            int trys = 3;
-            do
-            {   
-                string username = inputs.GetString("Ingrese su nombre de usuario: ");
-                string password = inputs.GetString("Ingrese su contraseña: ");
-                try
-                {
-                    user = _userService.Login(username, password);
-                }
-                catch(ExceptionServices ex)
-                {
-                    inputs.ColorError();
-                    Console.WriteLine("\n"+ex.Message);
-                    
-                }
-                finally { inputs.ColorNormal(); }
-                
-                if(user != null)
-                {
-                    break;
-                }
 
-                trys--;
+            //Person p = new Person("Julio", "Perez", "67898898670", "8097765654");
+            //Person p1 = new Person("Maria", "Pereira", "67898898670", "8097765654");
 
-            }while(trys > 0);
+            //_personService.AddPerson(p);
+            //_personService.AddPerson(p1);
 
-            if (trys == 0)
-            {
-                Console.WriteLine("Te bloqueamos la entrada al sistema por no tener un usuario");
-                Console.ReadLine();
-                Environment.Exit(0);
-            }
-            #endregion
+            //Doctor d = new Doctor(p, new List<Specialties>() { Specialties.Pediatra, Specialties.Cardiologo });
+            //_doctorService.AddDoctor(d);
+
+            //User u = new User(Rol.Doctor, "JP", "123", d);
+            //User u1 = new User(Rol.Administrador, "Maria", "123", null);
+            //_userService.AddUser(u);
+            //_userService.AddUser(u1);
+
+
+            user = _userViews.Login();
 
             bool cont = false;
-
             do
             {
                 (int, int) processChoice = BeginView();
@@ -163,24 +160,18 @@ namespace MedicalApp.Visual
                 switch (processChoice)
                 {
                     case (1, 1):
-                        Console.WriteLine("Estas son las citas que tiene pendientes");
-                        List<Consultation> cons = _consultationService.GetConsultationsPending();
-
-                        if (cons == null || cons.Count == 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine("No tienes consultas pendientes");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            break;
-                        }
-
-                        foreach (var c in cons)
-                        {
-                            Console.WriteLine($"{c.Id}) Fecha: {c.Date} | Paciente: {c.Patient.Person.Name} {c.Patient.Person.Lastname} | Doctor: {c.Doctor.Person.Name} {c.Doctor.Person.Lastname}");
-                        }
-
-
+                        
                         break;
+                    case (4, 1):
+                        _userViews.GetAllUsers();
+                        break;
+                    case (4, 2):
+                        _userViews.GetUserByIDView();
+                        break;
+                    case (4, 3):
+                        _userViews.AddUserView();
+                        break;
+
                 }
                 cont = FinishView("Gracias por usar nuestro sistema de consultas");
                 continue;

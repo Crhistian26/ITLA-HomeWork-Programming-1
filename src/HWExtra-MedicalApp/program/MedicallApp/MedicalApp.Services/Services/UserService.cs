@@ -34,6 +34,15 @@ namespace MedicalApp.Services.Services
             return user;
         }
 
+        public User GetUserById_WithDoctorData(int id)
+        {
+            var user = _userRepository.GetById_WithDoctorData(id);
+            if (user == null)
+            {
+                throw new ExceptionServices($"No se encontró un usuario con el ID {id}.");
+            }
+            return user;
+        }
         public List<User> GetAllUsers()
         {
             var users = _userRepository.GetAll();
@@ -71,5 +80,7 @@ namespace MedicalApp.Services.Services
             }
             _userRepository.Delete(user);
         }
+
+        
     }
 }

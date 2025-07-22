@@ -29,24 +29,29 @@ namespace MedicalApp.Persistence.Repositories
         public void Add(Patient patient)
         {
             _context.Patients.Add(patient);
+            _context.SaveChanges();
         }
         public void Update(Patient patient)
         {
             _context.Patients.Update(patient);
+            _context.SaveChanges();
         }
         public void Delete(Patient patient)
         {
             _context.Patients.Remove(patient);
+            _context.SaveChanges();
         }
         public void DeleteAll()
         {
             _context.Patients.RemoveRange(_context.Patients);
+            _context.SaveChanges();
         }
         public void DeleteById(int id)
         {
             _context.Patients.Remove(
                 _context.Patients.Where(x => x.Id == id).FirstOrDefault()
             );
+            _context.SaveChanges();
         }
     }
 }

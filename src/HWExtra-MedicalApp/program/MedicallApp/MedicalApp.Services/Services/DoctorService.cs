@@ -44,6 +44,25 @@ namespace MedicalApp.Services.Services
             return doctors;
         }
 
+        public List<Doctor> GetAllDoctors_WithPersonData()
+        {
+            var doctors = _doctorRepository.GetAllWithPersonData();
+            if (doctors == null || doctors.Count == 0)
+            {
+                throw new ExceptionServices("No hay doctores registrados.");
+            }
+            return doctors;
+        }
+
+        public List<Doctor> GetAllDoctor_WithPersonData_NoHaveUser()
+        {
+            var doctors = _doctorRepository.GetAll_WithPersonData_NoHaveUser();
+            if (doctors == null || doctors.Count == 0)
+            {
+                throw new ExceptionServices("Lo sentimos, todos los doctores ya tienen un usuario asignado.");
+            }
+            return doctors;
+        }
         public void AddDoctor(Doctor doctor)
         {
             if (doctor == null)

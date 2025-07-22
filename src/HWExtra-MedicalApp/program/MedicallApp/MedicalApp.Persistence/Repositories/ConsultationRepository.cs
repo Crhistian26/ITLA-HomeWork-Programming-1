@@ -37,24 +37,29 @@ namespace MedicalApp.Persistence.Repositories
         public void Add(Consultation consultation)
         {
             _context.Consultations.Add(consultation);
+            _context.SaveChanges();
         }
         public void Update(Consultation consultation)
         {
             _context.Consultations.Update(consultation);
+            _context.SaveChanges();
         }
         public void Delete(Consultation consultation)
         {
             _context.Consultations.Remove(consultation);
+            _context.SaveChanges();
         }
         public void DeleteAll()
         {
             _context.Consultations.RemoveRange(_context.Consultations);
+            _context.SaveChanges();
         }
         public void DeleteById(int id)
         {
             _context.Consultations.Remove(
                 _context.Consultations.Where(x => x.Id == id).FirstOrDefault()
             );
+            _context.SaveChanges();
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Azure.Core;
+using MedicalApp.Domain.Entitys;
+using MedicalApp.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace MedicalApp.Visual
 {
@@ -222,6 +226,63 @@ namespace MedicalApp.Visual
                     ColorNormal();
                     continue;
                 }
+            }
+        }
+
+        public Rol GetRol()
+        {
+            Rol rol = new Rol();
+            _color = Console.ForegroundColor;
+            while (true)
+            {
+                ColorNormal();
+                Console.WriteLine("Elige el rol:");
+                Console.WriteLine($"1){Rol.Administrador.ToString()}");
+                Console.WriteLine($"2){Rol.Doctor.ToString()}");
+
+
+                int max = 2;
+                int min = 1;
+                string s = Console.ReadLine();
+
+                if (s.Trim() == "")
+                {
+                    ColorError();
+                    Console.WriteLine("\nPorfavor no puedes dejar vacio este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    ColorNormal();
+                    continue;
+                }
+
+                if (!int.TryParse(s, out int value))
+                {
+                    ColorError();
+                    Console.WriteLine("\nPorfavor no puedes poner texto en este campo.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    ColorNormal();
+                    continue;
+                }
+                
+                if(value > 2 || value < 1)
+                {
+                    ColorError();
+                    Console.WriteLine($"\nPorfavor no puedes ingresar un numero mas alto que {max} ni mas pequeño que {min}.\nPresiona una tecla para continuar.");
+                    Console.ReadKey();
+                    ColorNormal();
+                    continue;
+                }
+
+                if(value == 1)
+                {
+                    rol = Rol.Administrador;
+                }
+
+                if(value == 2)
+                {
+                    rol =  Rol.Doctor;
+                }
+                
+                return rol;
             }
         }
     }
