@@ -11,14 +11,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace MedicalApp.Persistence
 {
     public class MedicalContext : DbContext
     {
-        public readonly User _user;
+        private readonly User _user;
         public MedicalContext() { }
-        public MedicalContext(DbContextOptions options, User user): base(options) { _user = user; }
+
+        public MedicalContext(DbContextOptions options) : base(options) {}
+
+        public MedicalContext(DbContextOptions options, User user) : base(options) { _user = user; } 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Persist Security Info=False;Trusted_Connection=True;database=Medical;server=(local);TrustServerCertificate=True;");
@@ -39,16 +43,97 @@ namespace MedicalApp.Persistence
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
+        private string Values(object value)
+        {
+            if (value == null)
+            {
+                return "NULL";
+            }
+
+            if (value is string)
+            {
+                return value.ToString();
+            }
+
+            if (value is System.Collections.IEnumerable enumerable)
+            {
+                var items = new List<string>();
+
+                foreach (var item in enumerable)
+                {
+                    items.Add(item.ToString());
+                }
+
+                return $"[{string.Join(", ", items)}]";
+            }
+            
+            return value.ToString();
+        }
         public override int SaveChanges()
         {
-            //foreach (var entry in this.ChangeTracker.Entries())
-            //{
-            //    if(entry.State == EntityState.Added && entry.Entity is Entity add)
-            //    {
-            //        AuditoryEnties auditoryEnties = new AuditoryEnties(add.GetAuditoryData(),entry.State,entry.)
-            //    }
+            var entitys = ChangeTracker.Entries()
+                .Where(e => 
+                    e.State == EntityState.Modified ||
+                    e.State == EntityState.Deleted ||
+                    e.State == EntityState.Added
+                ).ToList();
 
-            //}
+            foreach (var entry in entitys)
+            {
+                AuditoryData auditoryData = (entry.Entity as dynamic).GetAuditoryData();
+
+                string oldData = "";
+                string newData = "";                
+
+                if (entry.State == EntityState.Added)
+                {
+                    newData = string.Join(
+                        " | ",
+                        entry.CurrentValues.Properties.Select(p =>
+                            $"{p.Name}: {Values(entry.CurrentValues[p])}"
+                        )
+                    );
+                }
+
+                else if (entry.State == EntityState.Modified)
+                {
+                    oldData = string.Join(
+                        " | ",
+                        entry.OriginalValues.Properties.Select(p =>
+                            $"{p.Name}: {Values(entry.OriginalValues[p])}"
+                        )
+                    );
+
+                    newData = string.Join(
+                        " | ",
+                        entry.CurrentValues.Properties.Select(p =>
+                            $"{p.Name}: {Values(entry.CurrentValues[p])}"
+                        )
+                    );
+                }
+
+                else if (entry.State == EntityState.Deleted)
+                {
+                    oldData = string.Join(
+                        " | ",
+                        entry.OriginalValues.Properties
+                            .Select(p =>
+                            $"{p.Name}: {Values(entry.OriginalValues[p])}"
+                        )
+                    );
+                }
+
+                var audit = new AuditoryEnties(
+                    auditoryData,
+                    entry.State,
+                    oldData,
+                    newData,
+                    DateTime.Now,
+                    _user.Id
+                );
+                Auditories.Add(audit);
+            }
+
             return base.SaveChanges();
         }
 

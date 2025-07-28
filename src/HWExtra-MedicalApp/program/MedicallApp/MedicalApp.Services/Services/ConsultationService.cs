@@ -26,9 +26,9 @@ namespace MedicalApp.Services.Services
             return consultations;
         }
 
-        public List<Consultation> GetConsultationsPending()
+        public List<Consultation> GetConsultationsPending(Doctor doct)
         {
-            var consultations = _consultationRepository.GetConsultationsPending();
+            var consultations = _consultationRepository.GetConsultationsPending(doct);
             return consultations;
         }
         public void AddConsultation(Consultation consultation)

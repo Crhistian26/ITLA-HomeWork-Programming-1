@@ -15,7 +15,7 @@ namespace MedicalApp.Domain.Entitys
         [Key]
         public int Id { get; set; }
         [Required]
-        public Rol Rol { get; set; }
+        public List<Rol> Rols { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]
@@ -25,9 +25,9 @@ namespace MedicalApp.Domain.Entitys
 
 
         public User() { }
-        public User(Rol rol, string username, string password, Doctor? doctor)
+        public User(List<Rol> rol, string username, string password, Doctor? doctor)
         {
-            Rol = rol;
+            Rols = rol;
             Username = username;
             Password = password;
             Doctor = doctor;

@@ -25,7 +25,7 @@ namespace MedicalApp.Domain.Entitys
         public Reason Reason { get; set; }
         public string? Notes { get; set; }
 
-        public Consultation() { }
+        public  Consultation() { }
 
         public Consultation(DateOnly date, TimeOnly begin, TimeOnly end,bool pending, Patient patient, Doctor doctor, Reason reason, string? notes)
         {

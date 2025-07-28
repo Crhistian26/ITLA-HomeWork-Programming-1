@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalApp.Visual.Views
+namespace MedicalApp.Visual.Views.Secundary_Views
 {
     public class UserViews
     {
@@ -22,45 +22,7 @@ namespace MedicalApp.Visual.Views
             _userService = userService;
             _doctorService = doctorService;
         }
-        public User Login()
-        {
-            User user = new User();
-            int trys = 3;
-            do
-            {
-                string username = _input.GetString("Ingrese su nombre de usuario: ");
-                string password = _input.GetString("Ingrese su contraseña: ");
-                try
-                {
-                    user = _userService.Login(username, password);
-                }
-                catch (ExceptionServices ex)
-                {
-                    _input.ColorError();
-                    Console.WriteLine("\n" + ex.Message);
-
-                }
-                finally { _input.ColorNormal(); }
-
-                if (user != null)
-                {
-                    break;
-                }
-
-                trys--;
-
-            } while (trys > 0);
-
-            if (trys == 0)
-            {
-                Console.WriteLine("Te bloqueamos la entrada al sistema por no tener un usuario");
-                Console.ReadLine();
-                Environment.Exit(0);
-            }
-
-            return user;
-        }
-
+       
         public void GetUserByIDView()
         {
             Console.Clear();
@@ -76,7 +38,7 @@ namespace MedicalApp.Visual.Views
             int i = 1;
             foreach (User user in users)
             {
-                Console.WriteLine($"{i}){user.Username} | {user.Rol.ToString()}");
+                Console.WriteLine($"{i}){user.Username} | ");
                 i++;
             }
 
@@ -87,7 +49,11 @@ namespace MedicalApp.Visual.Views
             Console.Clear();
             Console.WriteLine($"Nombre de usuario: {userCheck.Username}");
             Console.WriteLine($"Contraseña: {userCheck.Password}");
-            Console.WriteLine($"Rol: {userCheck.Rol.ToString()}");
+            Console.WriteLine("Los roles que tiene son: ");
+            foreach (Rol rol in userCheck.Rols) 
+            { 
+                Console.Write(rol.ToString()+", ");
+            }
 
             if (userCheck.DoctorId != null)
             {
@@ -116,7 +82,15 @@ namespace MedicalApp.Visual.Views
             int i = 1;
             foreach (User user in users)
             {
-                Console.WriteLine($"{i}){user.Username} | {user.Rol.ToString()}");
+                Console.WriteLine($"{i}){user.Username} | ");
+                foreach (Rol rol in user.Rols)
+                {
+                    Console.Write(rol.ToString() + ", ");
+                }
+                foreach (Rol rol in user.Rols)
+                {
+                    Console.Write(rol.ToString() + ", ");
+                }
                 i++;
             }
         }
@@ -129,7 +103,7 @@ namespace MedicalApp.Visual.Views
             Console.WriteLine("Bienvenido a la creacion de usuarios, necesito que llene los siguientes campos:");
             string usename = _input.GetString("Nombre de usuario: ");
             string password = _input.GetString("Contraseña: ");
-            Rol rol = _input.GetRol();
+            List<Rol> rols = _input.GetRols();
             
             bool confirmDoctor = _input.GetBool("Quieres vincular a un doctor con este usuario?");
             if (confirmDoctor)
@@ -138,7 +112,7 @@ namespace MedicalApp.Visual.Views
             }
             
 
-            user = new User(rol, usename, password, doctor);
+            user = new User(rols, usename, password, doctor);
 
             _userService.AddUser(user);
 
@@ -196,7 +170,11 @@ namespace MedicalApp.Visual.Views
                 int i = 1;
                 foreach (User user in users)
                 {
-                    Console.WriteLine($"{i}){user.Username} | {user.Rol.ToString()}");
+                    Console.WriteLine($"{i}){user.Username} | ");
+                    foreach (Rol rol in user.Rols)
+                    {
+                        Console.Write(rol.ToString() + ", ");
+                    }
                     i++;
                 }
             }

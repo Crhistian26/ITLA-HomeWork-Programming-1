@@ -285,5 +285,10 @@ namespace MedicalApp.Visual
                 return rol;
             }
         }
+
+        public List<Rol> GetRols()
+        {
+            return new List<Rol>();
+        }
     }
 }

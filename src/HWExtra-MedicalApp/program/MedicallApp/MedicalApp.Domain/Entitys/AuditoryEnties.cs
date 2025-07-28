@@ -22,18 +22,17 @@ namespace MedicalApp.Domain.Entitys
         public string NewDate { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
-        [Required]
         public User User { get; set; }
         public AuditoryEnties() { }
         
-        public AuditoryEnties(AuditoryData auditoryData, EntityState entityState, string oldDate, string newDate, DateTime date, User user)
+        public AuditoryEnties(AuditoryData auditoryData, EntityState entityState, string oldDate, string newDate, DateTime date, int userId)
         {
             NameTable = auditoryData.NameTable;
             IdTable = auditoryData.IdEntity;
             EntityState = entityState;
             OldDate = oldDate;
             NewDate = newDate;
-            User = user;
+            UserId = userId;
             Date = date;
         }
     }

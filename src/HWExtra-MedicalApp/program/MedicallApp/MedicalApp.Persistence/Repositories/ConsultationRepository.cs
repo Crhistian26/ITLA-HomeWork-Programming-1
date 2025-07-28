@@ -21,17 +21,12 @@ namespace MedicalApp.Persistence.Repositories
             return data;
         }
 
-        public List<Consultation> GetConsultationsPending()
+        public List<Consultation> GetConsultationsPending(Doctor doct)
         {
             List<Consultation> data;
-            if (_context._user.Rol == Domain.Enums.Rol.Doctor)
-            {
-                data = _context.Consultations.Where(x => x.Pending == true && x.Doctor.User == _context._user).ToList();
-            }
-            else 
-            {
-                data = _context.Consultations.Where(x => x.Pending == true).ToList();
-            }
+           
+            data = _context.Consultations.Where(x => x.Pending == true && x.Doctor == doct).ToList();
+
             return data;
         }
         public void Add(Consultation consultation)
