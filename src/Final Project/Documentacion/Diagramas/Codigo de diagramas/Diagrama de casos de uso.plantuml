@@ -1,0 +1,52 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam usecase {
+    BackgroundColor<<Estudiante>> LightBlue
+    BackgroundColor<<Todos>> LightGray
+    BackgroundColor<<Administrador>> LightCoral
+    BackgroundColor<<Bibliotecario y Administrador>> LightGreen
+    BorderColor Black
+    ArrowColor Black
+}
+
+actor Estudiante
+actor Bibliotecario
+actor Administrador
+
+rectangle "Biblioteca Online" {
+
+    usecase "Logearse" as L <<Todos>>
+
+    Estudiante --> L
+    Administrador --> L
+    Bibliotecario --> L
+
+    rectangle "Funciones exclusivas del estudiante" as E  {
+        usecase "Ver libros disponibles"  <<Estudiante>>
+        usecase "Reservar libros"  <<Estudiante>>
+        usecase "Ver reservas propias"  <<Estudiante>>
+        usecase "Ver sus multas"  <<Estudiante>>
+        usecase "Ver/descargar libros virtuales"  <<Estudiante>>
+        usecase "Registrarse" <<Estudiante>>
+    }
+   
+    rectangle "Funciones compartidas\n(Bibliotecario y Administrador)" as BA{
+        usecase "Ver catálogo completo" <<Bibliotecario y Administrador>>
+        usecase "Ver todas las reservas" <<Bibliotecario y Administrador>>
+        usecase "Ver todas las multas" <<Bibliotecario y Administrador>>
+        usecase "Aprobar/rechazar reservas" <<Bibliotecario y Administrador>>
+        usecase "Generar multas" <<Bibliotecario y Administrador>>
+        usecase "Cobrar/revocar multas" <<Bibliotecario y Administrador>>
+        usecase "Registrar reservas inmediatas" <<Bibliotecario y Administrador>>
+        usecase "Agregar/remover libros físicos" <<Bibliotecario y Administrador>>
+        usecase "Agregar/remover libros virtuales" <<Bibliotecario y Administrador>>
+        usecase "Bloquear estudiantes" <<Bibliotecario y Administrador>>
+    }
+
+    Estudiante --> E
+    Bibliotecario --> BA
+    Administrador --> BA
+    usecase "Gestionar bibliotecarios" as A1 <<Administrador>>
+    Administrador --> A1
+}
+@enduml

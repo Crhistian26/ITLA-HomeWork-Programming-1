@@ -1,0 +1,163 @@
+@startuml
+
+skinparam Class {
+    BackgroundColor<<Entidad>> LightGreen
+    BackgroundColor<<Dato_Unico>> LightBlue
+    BackgroundColor<<Relacion>> LightCoral
+    BackgroundColor<<Entidad_de_Control>> LightYellow
+    BackgroundColor<<Enum>> LightGrey
+}
+
+Class Persona <<Entidad>>{
+    +Id : int,
+    +Nombre: string,
+    +Apellido: string,
+    +Telefono: string,
+    +Cedula: string,
+    +Direccion: string,
+}
+
+Class Usuario <<Entidad>>{
+    +Id: int,
+    +Persona: Persona,
+    +Usuario: string,
+    +Contraseña: string,
+}
+
+Class Rol <<Dato_Unico>>{
+    +Id: int,
+    +Rol: string
+}
+
+Class UsuarioRol <<Relacion>>{
+    Rol: Rol,
+    Usuario: Usuario
+}
+Class Estudiante <<Entidad>>{
+    +Id: int,
+    +Persona: Persona,
+    +Matricula: string,
+}
+
+Class Bibliotecario <<Entidad>>{
+    +Id: int,
+    +Persona: Persona,
+    +Carnet: string,
+}
+
+Class Libro <<Entidad>>{
+    +Id: int,
+    +Titulo: string,
+    +Edicion: string,
+    +Editorial: string,
+    +Autor: Autor,
+    +Idioma: Idioma,
+    +Paginas: int,
+    +Url_Imagen: string,
+    +Url_VersionDigital: string,
+}
+
+Class Stock_Libros <<Entidad_de_Control>>{
+    +Id: int,
+    +Libro: Libro,
+    +Cant_Existente: int,
+    +Cant_Disponible: int
+}
+
+Class Autor <<Dato_Unico>>{
+    +Id: int,
+    +Nombre: string,
+}
+
+Class Idioma <<Dato_Unico>>{
+    +Id: int,
+    +Idioma: string,
+}
+
+Class Genero <<Dato_Unico>>{
+    +Id: int,
+    +Genero: string,
+}
+
+Class Prestamo <<Entidad>>{
+    +Id: int,
+    +Estado: Estado_prestamo,
+    +Tipo: Tipo_prestamo,
+    +Estudiante: Estudiante,
+    +Libro: Libro,
+    +Cantidad: int,
+    +Fecha_Solicitud: Datetime,
+    +Fecha_Retiro: Datetime,
+    +Fecha_Devolucion: Datetime
+}
+
+Class Multa <<Entidad>>{
+    +Id: int,
+    +Estudiante: Estudiante,
+    +Prestamo: Prestamo,
+    +Descripcion: string,
+    +Monto: int,
+    +Estado: Estado_multa,
+}
+
+Class Auditoria <<Entidad_de_Control>>{
+    +Id: int,
+    +Fecha: Datetime,
+    +Tipo: Tipo_auditoria,
+    +Tabla: string,
+    +Data_anterior: string,
+    +Data_posterior: string,
+    +Usuario: Usuario,
+    +Descripcion: string
+}
+
+Class LibroGenero <<Relacion>>{
+    Libro: Libro
+    Genero: Genero
+}
+enum Tipo_auditoria{
+    Agregar,
+    Editar,
+    Eliminar
+}
+
+enum Estado_multa{
+    Pendiente,
+    Pagada,
+    Revocada,
+}
+
+enum Estado_prestamo{
+    Pendiente,
+    Aprobado,
+    Rechazado
+}
+
+enum Tipo_prestamo{
+    Solicitud_digital,
+    Retiro_fisico
+}
+
+Usuario -->Persona
+Estudiante --> Persona
+Bibliotecario --> Persona
+Prestamo --> Libro
+Prestamo --> Estudiante
+Prestamo o-- Tipo_prestamo
+Prestamo o-- Estado_prestamo
+Multa --> Estudiante
+Multa --> Prestamo
+Multa o-- Estado_multa
+Usuario *-- UsuarioRol
+Rol *-- UsuarioRol
+Auditoria --> Usuario
+Auditoria o-- Tipo_auditoria
+Libro *-- LibroGenero 
+Genero *-- LibroGenero
+Libro --> Idioma
+Libro -->  Autor
+Stock_Libros --> Libro : "Libro al que esta\nEnlazado el stock"
+
+
+
+@enduml

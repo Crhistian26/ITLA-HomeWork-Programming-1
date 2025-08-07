@@ -23,6 +23,7 @@ namespace MedicalApp.Persistence
         public MedicalContext(DbContextOptions options) : base(options) {}
 
         public MedicalContext(DbContextOptions options, User user) : base(options) { _user = user; } 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Persist Security Info=False;Trusted_Connection=True;database=Medical;server=(local);TrustServerCertificate=True;");
@@ -43,7 +44,7 @@ namespace MedicalApp.Persistence
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        private string Values(object value)
+        private string ChangeFormatValues(object value)
         {
             if (value == null)
             {
@@ -89,8 +90,9 @@ namespace MedicalApp.Persistence
                 {
                     newData = string.Join(
                         " | ",
-                        entry.CurrentValues.Properties.Select(p =>
-                            $"{p.Name}: {Values(entry.CurrentValues[p])}"
+                        entry.CurrentValues.Properties
+                            .Select(p =>
+                            $"{p.Name}: {ChangeFormatValues(entry.CurrentValues[p])}"
                         )
                     );
                 }
@@ -99,15 +101,17 @@ namespace MedicalApp.Persistence
                 {
                     oldData = string.Join(
                         " | ",
-                        entry.OriginalValues.Properties.Select(p =>
-                            $"{p.Name}: {Values(entry.OriginalValues[p])}"
+                        entry.OriginalValues.Properties
+                            .Select(p =>
+                            $"{p.Name}: {ChangeFormatValues(entry.OriginalValues[p])}"
                         )
                     );
 
                     newData = string.Join(
                         " | ",
-                        entry.CurrentValues.Properties.Select(p =>
-                            $"{p.Name}: {Values(entry.CurrentValues[p])}"
+                        entry.CurrentValues.Properties
+                            .Select(p =>
+                            $"{p.Name}: {ChangeFormatValues(entry.CurrentValues[p])}"
                         )
                     );
                 }
@@ -118,7 +122,7 @@ namespace MedicalApp.Persistence
                         " | ",
                         entry.OriginalValues.Properties
                             .Select(p =>
-                            $"{p.Name}: {Values(entry.OriginalValues[p])}"
+                            $"{p.Name}: {ChangeFormatValues(entry.OriginalValues[p])}"
                         )
                     );
                 }

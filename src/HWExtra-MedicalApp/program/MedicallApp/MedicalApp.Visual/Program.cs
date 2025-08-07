@@ -126,22 +126,14 @@ namespace MedicalApp.Visual
 
         static void Main(string[] args)
         {
-            User f = _context.Users.Select(a=>a).First();
-            _context = new MedicalContext(new DbContextOptionsBuilder<MedicalContext>().Options, f);
-
-
-            User a = _context.Users.Select(a => a).Where(a=> a.Id == 7).First();
-            _context.Users.Remove(a);
-            _context.SaveChanges();
-            Console.ForegroundColor= ConsoleColor.White;
 
             user = _generalView.Login();
+            _context = new MedicalContext(new DbContextOptionsBuilder<MedicalContext>().Options, user);
+
 
             bool cont = false;
             do
             {
-                
-
                 if(user.Rols.Contains(Rol.Administrador) && user.Rols.Contains(Rol.Doctor))
                 {
                     new LeonardoDaVinciView(_context).Main(args);
