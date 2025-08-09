@@ -15,6 +15,7 @@ Class Persona <<Entidad>>{
     +Telefono: string,
     +Cedula: string,
     +Direccion: string,
+    
 }
 
 Class Usuario <<Entidad>>{
@@ -22,23 +23,19 @@ Class Usuario <<Entidad>>{
     +Persona: Persona,
     +Usuario: string,
     +Contraseña: string,
+    +Rol: Rol
 }
 
-Class Rol <<Dato_Unico>>{
-    +Id: int,
-    +Rol: string
-}
-
-Class UsuarioRol <<Relacion>>{
-    Rol: Rol,
-    Usuario: Usuario
-}
 Class Estudiante <<Entidad>>{
     +Id: int,
     +Persona: Persona,
-    +Matricula: string,
+    +Matricula: Matricula,
 }
 
+class Matricula <<Dato_Unico>>{
+    +Id: int,
+    +Matricula: string
+}
 Class Bibliotecario <<Entidad>>{
     +Id: int,
     +Persona: Persona,
@@ -93,32 +90,25 @@ Class Prestamo <<Entidad>>{
 
 Class Multa <<Entidad>>{
     +Id: int,
-    +Estudiante: Estudiante,
     +Prestamo: Prestamo,
     +Descripcion: string,
     +Monto: int,
     +Estado: Estado_multa,
 }
 
-Class Auditoria <<Entidad_de_Control>>{
-    +Id: int,
-    +Fecha: Datetime,
-    +Tipo: Tipo_auditoria,
-    +Tabla: string,
-    +Data_anterior: string,
-    +Data_posterior: string,
-    +Usuario: Usuario,
-    +Descripcion: string
-}
-
 Class LibroGenero <<Relacion>>{
     Libro: Libro
     Genero: Genero
 }
-enum Tipo_auditoria{
-    Agregar,
-    Editar,
-    Eliminar
+
+Class LibroAutor <<Relacion>>{
+    Libro: Libro,
+    Autor: Autor
+}
+enum Rol{
+    Admin,
+    Bibliotecario,
+    Estudiante
 }
 
 enum Estado_multa{
@@ -138,26 +128,27 @@ enum Tipo_prestamo{
     Retiro_fisico
 }
 
-Usuario -->Persona
-Estudiante --> Persona
-Bibliotecario --> Persona
-Prestamo --> Libro
-Prestamo --> Estudiante
-Prestamo o-- Tipo_prestamo
-Prestamo o-- Estado_prestamo
-Multa --> Estudiante
-Multa --> Prestamo
-Multa o-- Estado_multa
-Usuario *-- UsuarioRol
-Rol *-- UsuarioRol
-Auditoria --> Usuario
-Auditoria o-- Tipo_auditoria
-Libro *-- LibroGenero 
-Genero *-- LibroGenero
-Libro --> Idioma
-Libro -->  Autor
-Stock_Libros --> Libro : "Libro al que esta\nEnlazado el stock"
+Usuario "1" *-- "1" Persona         
+Usuario "1" *-- "1..*" Rol          
 
+Estudiante "1" *-- "1" Persona     
+Estudiante "1" -- "1" Matricula 
+Bibliotecario "1" *-- "1" Persona   
 
+Prestamo "1" -- "1" Libro
+Prestamo "1" -- "1" Estudiante
+Prestamo "1" *-- "1" Tipo_prestamo
+Prestamo "1" *-- "1" Estado_prestamo
+
+Multa "1" *-- "1" Prestamo
+Multa "1" *-- "1" Estado_multa
+
+Libro "1" -- "1..*" LibroGenero
+Genero "1" -- "1..*" LibroGenero
+Libro "1" *-- "1" Idioma
+Libro "1" -- "1..*" LibroAutor
+Autor "1" -- "0..*" LibroAutor
+
+Stock_Libros "1" *-- "1" Libro : "Libro al que está\nEnlazado el stock"
 
 @enduml

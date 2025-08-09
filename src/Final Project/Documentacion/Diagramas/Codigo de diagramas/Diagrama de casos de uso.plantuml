@@ -38,15 +38,15 @@ rectangle "Biblioteca Online" {
         usecase "Generar multas" <<Bibliotecario y Administrador>>
         usecase "Cobrar/revocar multas" <<Bibliotecario y Administrador>>
         usecase "Registrar reservas inmediatas" <<Bibliotecario y Administrador>>
-        usecase "Agregar/remover libros físicos" <<Bibliotecario y Administrador>>
-        usecase "Agregar/remover libros virtuales" <<Bibliotecario y Administrador>>
-        usecase "Bloquear estudiantes" <<Bibliotecario y Administrador>>
+        usecase "Control de libros físicos y digitales" <<Bibliotecario y Administrador>>
     }
 
     Estudiante --> E
     Bibliotecario --> BA
     Administrador --> BA
-    usecase "Gestionar bibliotecarios" as A1 <<Administrador>>
+    usecase "Gestionar usuarios" as A1 <<Administrador>>
+    usecase "Generar matriculas" as A2 <<Administrador>>
     Administrador --> A1
+    Administrador --> A2
 }
 @enduml
