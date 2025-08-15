@@ -1,7 +1,9 @@
 ﻿using BiblioUniversity.Domain.Entities.DataOnly;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +73,16 @@ namespace BiblioUniversity.Domain.Entities
                 foreach (Language language in languages)
                     Languages.Add(language);
             }
+        }
+
+        public Book(int id, string title, string edition, int pages, string url_image, string url_digital)
+        {
+            Id = id;
+            Title = title;
+            Edition = edition;
+            Pages = pages;
+            Url_image = url_image;
+            Url_digital = url_digital;
         }
 
     }

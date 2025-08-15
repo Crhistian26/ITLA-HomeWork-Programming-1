@@ -1,5 +1,7 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Entities.DataOnly;
+using BiblioUniversity.Infraestructure.DBContext.Seeds;
+using BiblioUniversity.Infraestructure.DBContext.Seeds.DataOnly;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,22 @@ namespace BiblioUniversity.Infraestructure.DBContext
             optionsBuilder.UseSqlServer("Persist Security Info=False;Trusted_Connection=True;database=BiblioUniversity;server=(local);TrustServerCertificate=True;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PersonSeed());
+
+            modelBuilder.ApplyConfiguration(new EnrollmentSeed());
+            modelBuilder.ApplyConfiguration(new StudentSeed());
+
+            modelBuilder.ApplyConfiguration(new LibrarianSeed());
+
+            modelBuilder.ApplyConfiguration(new UserSeed());
+
+            modelBuilder.ApplyConfiguration(new AuthorSeed());
+            modelBuilder.ApplyConfiguration(new LanguageSeed());
+            modelBuilder.ApplyConfiguration(new GenreSeed());
+            modelBuilder.ApplyConfiguration(new BookSeed());
+        }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Librarian> Librarianes { get; set; }

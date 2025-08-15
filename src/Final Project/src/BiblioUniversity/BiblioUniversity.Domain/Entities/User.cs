@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,15 @@ namespace BiblioUniversity.Domain.Entities
             Password = password;
             Rol = rol;
             Person = person;
+        }
+
+        public User(int id, string username, string password, Rol rol, int personid)
+        {
+            Id = id;
+            Username = username;
+            Password = password;
+            Rol = rol;
+            PersonId = personid;
         }
     }
 }

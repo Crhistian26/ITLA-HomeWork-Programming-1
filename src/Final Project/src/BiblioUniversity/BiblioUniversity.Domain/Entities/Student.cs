@@ -1,13 +1,17 @@
 ﻿using BiblioUniversity.Domain.Entities.DataOnly;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BiblioUniversity.Domain.Entities
 {
+    [Index(nameof(PersonId), IsUnique =  true)]
+    [Index(nameof(EnrollmentId), IsUnique = true)]
     public class Student
     {
         [Key]
@@ -32,6 +36,13 @@ namespace BiblioUniversity.Domain.Entities
             Id = id;
             Person = person;
             Enrollment = enrollment;
+        }
+
+        public Student(int id, int personid, int enrollmentid)
+        {
+            Id = id;
+            PersonId = personid;
+            EnrollmentId = enrollmentid;
         }
 
     }

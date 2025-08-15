@@ -4,6 +4,7 @@ using BiblioUniversity.Infraestructure.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiblioUniversity.Infraestructure.Migrations
 {
     [DbContext(typeof(BiblioContext))]
-    partial class BiblioContextModelSnapshot : ModelSnapshot
+    [Migration("20250815145306_AddSeedForPerson1")]
+    partial class AddSeedForPerson1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,28 +38,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                     b.HasIndex("BooksId");
 
                     b.ToTable("AuthorBook");
-
-                    b.HasData(
-                        new
-                        {
-                            AuthorsId = 3,
-                            BooksId = 1
-                        },
-                        new
-                        {
-                            AuthorsId = 2,
-                            BooksId = 2
-                        },
-                        new
-                        {
-                            AuthorsId = 1,
-                            BooksId = 3
-                        },
-                        new
-                        {
-                            AuthorsId = 3,
-                            BooksId = 4
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Book", b =>
@@ -91,44 +72,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Edition = "1ra",
-                            Pages = 256,
-                            Title = "Ultimate Python: de cero a experto",
-                            Url_digital = "",
-                            Url_image = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Edition = "1ra",
-                            Pages = 234,
-                            Title = "Aprendiendo Git y Github",
-                            Url_digital = "",
-                            Url_image = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Edition = "1ra",
-                            Pages = 456,
-                            Title = "Clean Code",
-                            Url_digital = "",
-                            Url_image = ""
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Edition = "1ra",
-                            Pages = 624,
-                            Title = "Ultimate TypeScript: Guía completa para principiantes (Spanish Edition)",
-                            Url_digital = "",
-                            Url_image = ""
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.DataOnly.Author", b =>
@@ -141,31 +84,11 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Authors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Robert C. Martin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Miguel Angel Duran Garcia"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Nicolas Schurmann"
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.DataOnly.Enrollment", b =>
@@ -178,36 +101,11 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
-                        .IsUnique();
-
                     b.ToTable("Enrollment");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "2025-0347"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "2025-4533"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "2025-9865"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "2025-5467"
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.DataOnly.Genre", b =>
@@ -220,21 +118,11 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Software"
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.DataOnly.Language", b =>
@@ -247,31 +135,11 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Español"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ingles"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Frances"
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Fine", b =>
@@ -314,34 +182,17 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("License")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("License")
-                        .IsUnique();
-
                     b.HasIndex("PersonId")
                         .IsUnique();
 
                     b.ToTable("Librarianes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            License = "B02342",
-                            PersonId = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            License = "B03342",
-                            PersonId = 6
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Person", b =>
@@ -377,9 +228,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id_Card")
-                        .IsUnique();
-
                     b.ToTable("Persons");
 
                     b.HasData(
@@ -391,60 +239,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                             Lastname = "Perez Mendosa",
                             Name = "Fernando Garcia",
                             Telephone = "8097896786"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Los Mina",
-                            Id_Card = "40234544556",
-                            Lastname = "Ramirez Carrasco",
-                            Name = "Pedro Alvarez",
-                            Telephone = "8295678976"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Santo Domingo Este",
-                            Id_Card = "40298765432",
-                            Lastname = "Gomez Castillo",
-                            Name = "Laura Martinez",
-                            Telephone = "8092345678"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Villa Mella",
-                            Id_Card = "40287654321",
-                            Lastname = "Torres Mejia",
-                            Name = "Jose Ramirez",
-                            Telephone = "8293456789"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "San Cristobal",
-                            Id_Card = "40276543210",
-                            Lastname = "Lopez Santana",
-                            Name = "Carla Fernandez",
-                            Telephone = "8494567890"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "Boca Chica",
-                            Id_Card = "40265432109",
-                            Lastname = "Morales Diaz",
-                            Name = "Luis Castillo",
-                            Telephone = "8095678901"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Address = "La Capital",
-                            Id_Card = "43123435654",
-                            Lastname = "Benedict Torvalds",
-                            Name = "Linus",
-                            Telephone = "8297768909"
                         });
                 });
 
@@ -508,8 +302,7 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId")
-                        .IsUnique();
+                    b.HasIndex("BookId");
 
                     b.ToTable("Stocks");
                 });
@@ -537,32 +330,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Students");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EnrollmentId = 1,
-                            PersonId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EnrollmentId = 2,
-                            PersonId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EnrollmentId = 3,
-                            PersonId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EnrollmentId = 4,
-                            PersonId = 4
-                        });
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.User", b =>
@@ -593,64 +360,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Password = "2025-0347",
-                            PersonId = 1,
-                            Rol = 2,
-                            Username = "2025-0347"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Password = "2025-4533",
-                            PersonId = 2,
-                            Rol = 2,
-                            Username = "2025-4533"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Password = "2025-9865",
-                            PersonId = 3,
-                            Rol = 2,
-                            Username = "2025-9865"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Password = "2025-5467",
-                            PersonId = 4,
-                            Rol = 2,
-                            Username = "2025-5467"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Password = "B02342",
-                            PersonId = 5,
-                            Rol = 1,
-                            Username = "B02342"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Password = "B03342",
-                            PersonId = 6,
-                            Rol = 1,
-                            Username = "B03342"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Password = "123",
-                            PersonId = 7,
-                            Rol = 0,
-                            Username = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("BookGenre", b =>
@@ -666,28 +375,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                     b.HasIndex("GenresId");
 
                     b.ToTable("BookGenre");
-
-                    b.HasData(
-                        new
-                        {
-                            BooksId = 1,
-                            GenresId = 1
-                        },
-                        new
-                        {
-                            BooksId = 2,
-                            GenresId = 1
-                        },
-                        new
-                        {
-                            BooksId = 3,
-                            GenresId = 1
-                        },
-                        new
-                        {
-                            BooksId = 4,
-                            GenresId = 1
-                        });
                 });
 
             modelBuilder.Entity("BookLanguage", b =>
@@ -703,28 +390,6 @@ namespace BiblioUniversity.Infraestructure.Migrations
                     b.HasIndex("LanguagesId");
 
                     b.ToTable("BookLanguage");
-
-                    b.HasData(
-                        new
-                        {
-                            BooksId = 1,
-                            LanguagesId = 1
-                        },
-                        new
-                        {
-                            BooksId = 2,
-                            LanguagesId = 1
-                        },
-                        new
-                        {
-                            BooksId = 3,
-                            LanguagesId = 2
-                        },
-                        new
-                        {
-                            BooksId = 4,
-                            LanguagesId = 1
-                        });
                 });
 
             modelBuilder.Entity("AuthorBook", b =>
