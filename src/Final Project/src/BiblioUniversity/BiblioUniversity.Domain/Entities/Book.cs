@@ -39,9 +39,9 @@ namespace BiblioUniversity.Domain.Entities
 
         public Book () 
         {
-            Authors = new HashSet<Author>();
-            Genres = new HashSet<Genre>();
-            Languages = new HashSet<Language>();
+            Authors = new List<Author>();
+            Genres = new List<Genre>();
+            Languages = new List<Language>();
         }
 
         public Book(int id, string title, string edition, int pages, string url_image, string url_digital, List<Author> autors, List<Genre> genres, List<Language> languages)

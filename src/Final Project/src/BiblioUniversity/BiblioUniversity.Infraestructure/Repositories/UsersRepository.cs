@@ -33,9 +33,23 @@ namespace BiblioUniversity.Infraestructure.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<User>> GetAllAsync()
+        public async Task<User> GetWithPersonByIdAsync(int id)
+        {
+            return await
+                _context.Users.Select(x => x)
+                .Include(x=> x.Person)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetAllWithPersonAsync()
+        {
+            return await _context.Users.Include(x=>x.Person).ToListAsync();
         }
 
         public async Task<User> UpdateAsync(User user)
@@ -59,13 +73,6 @@ namespace BiblioUniversity.Infraestructure.Repositories
         {
             _context.Users.Remove(user);
             _context.SaveChanges();
-        }
-
-        public async Task<ICollection<User>> GetUsersForRol(Rol rol)
-        {
-            return await _context.Users.Select(x => x)
-                .Where(x => x.Rol == rol)
-                .ToListAsync();
         }
 
         public async Task<bool> ConfirmUserExists(string username)

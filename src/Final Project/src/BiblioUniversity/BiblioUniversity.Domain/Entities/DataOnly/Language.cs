@@ -12,7 +12,7 @@ namespace BiblioUniversity.Domain.Entities.DataOnly
         public string Name { get; set; }
 
         //Navegation
-        public ICollection<Book> Books { get; set; }
+        public IEnumerable<Book> Books { get; set; }
 
         public Language() { }
 
