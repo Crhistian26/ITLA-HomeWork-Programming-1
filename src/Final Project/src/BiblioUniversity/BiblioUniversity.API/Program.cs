@@ -10,10 +10,6 @@ namespace BiblioUniversity.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<BiblioContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"),
-                b => b.MigrationsAssembly("BiblioUniversity.Infraestructure")));
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

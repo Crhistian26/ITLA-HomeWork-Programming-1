@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.Domain", "BiblioUniversity.Domain\BiblioUniversity.Domain.csproj", "{8A0CB00F-14E8-4024-8D4E-06EFD2BD7217}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.Application", "BiblioUniversity.Application\BiblioUniversity.Application.csproj", "{7CB8C33A-44C7-4C41-903A-20497FDD9D11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.API", "BiblioUniversity.API\BiblioUniversity.API.csproj", "{CA6E145D-58BA-4051-82C9-BE175AC070BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pruebas", "Pruebas\Pruebas.csproj", "{C02A1435-D190-42F3-AC14-DE16A823A801}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C02A1435-D190-42F3-AC14-DE16A823A801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C02A1435-D190-42F3-AC14-DE16A823A801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C02A1435-D190-42F3-AC14-DE16A823A801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C02A1435-D190-42F3-AC14-DE16A823A801}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C626E12-80BD-4DD7-9FF9-41D79E33316D}
 	EndGlobalSection
 EndGlobal
