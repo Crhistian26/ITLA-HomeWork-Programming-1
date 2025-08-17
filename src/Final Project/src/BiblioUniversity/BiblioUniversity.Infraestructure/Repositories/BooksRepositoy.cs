@@ -40,7 +40,7 @@ namespace BiblioUniversity.Infraestructure.Repositories
             _context.SaveChanges();
         }
 
-        public async Task<IEnumerable<Book>> GetAllWithAllData()
+        public async Task<IEnumerable<Book>> GetAllWithAllDataAsync()
         {
             return await _context.Books
                 .Include(x => x.Authors)
@@ -48,7 +48,7 @@ namespace BiblioUniversity.Infraestructure.Repositories
                 .Include(x => x.Genres)
                 .ToListAsync();
         }
-        public async Task<Book> GetByIdWithAllData(int id)
+        public async Task<Book> GetByIdWithAllDataAsync(int id)
         {
             return await _context.Books
                 .Include(x => x.Authors)

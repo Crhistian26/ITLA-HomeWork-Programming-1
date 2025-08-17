@@ -49,6 +49,6 @@ namespace BiblioUniversity.Infraestructure.DBContext
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Language> Languages { get; set; }
-        
+        public DbSet<Enrollment> Enrollments { get; set; }
     }
 }

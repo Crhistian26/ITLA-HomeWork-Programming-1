@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BiblioUniversity.Domain.Interfaces.Repositories
 {
-    internal interface ILibrariansRepository : IBaseRepository<Librarian>
+    public interface ILibrariansRepository : IBaseRepository<Librarian>
     {
         /// <summary>
         /// Metodo para obtener el <see cref="Librarian"/> por su ID de forma asincrona con todos los datos <see cref="Person"/> incluidos.

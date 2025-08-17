@@ -43,7 +43,7 @@ namespace BiblioUniversity.Infraestructure.Repositories
             _context.Stocks.Remove(entity);
             _context.SaveChanges();
         }
-        public async Task<Stock_Book> GetByIdWithAllBookData(int id)
+        public async Task<Stock_Book> GetByIdWithAllBookDataAsync(int id)
         {
             return await _context.Stocks
                 .Include(x => x.Book)

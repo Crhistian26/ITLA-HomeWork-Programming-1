@@ -37,7 +37,7 @@ namespace BiblioUniversity.Domain.Interfaces.Repositories
         /// </summary>
         /// <param name="username">El nombre de usuario.</param>
         /// <returns>Un <see cref="bool"/> si existe sera True sino sera False.</returns>
-        Task<bool> ConfirmUserExists(string username);
+        bool ConfirmUserExists(string username);
 
     }
 }

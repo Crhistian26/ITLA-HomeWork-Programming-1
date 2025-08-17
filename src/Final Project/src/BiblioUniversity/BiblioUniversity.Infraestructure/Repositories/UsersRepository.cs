@@ -63,9 +63,11 @@ namespace BiblioUniversity.Infraestructure.Repositories
         {
             _context.Users.Add(user);
             _context.SaveChanges();
+
             user = await _context.Users.Select(x => x)
                 .Where(x => x.Id == user.Id)
                 .FirstOrDefaultAsync();
+
             return user;
         }
 
@@ -75,9 +77,9 @@ namespace BiblioUniversity.Infraestructure.Repositories
             _context.SaveChanges();
         }
 
-        public async Task<bool> ConfirmUserExists(string username)
+        public bool ConfirmUserExists(string username)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(x=> x.Username == username);
+            User user = _context.Users.FirstOrDefault(x=> x.Username == username);
 
             if (user == null)
             {

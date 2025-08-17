@@ -15,12 +15,12 @@ namespace BiblioUniversity.Domain.Interfaces.Repositories
         /// </summary>
         /// <param name="id">Su id.</param>
         /// <returns>El <see cref="Stock_Book"/> (Con los datos del libro) que corresponda con el id.</returns>
-        Task<Stock_Book> GetByIdWithAllBookData(int id);
+        Task<Stock_Book> GetByIdWithAllBookDataAsync(int id);
 
         /// <summary>
         /// Este metodo te devuelve una coleccion de <see cref="Stock_Book"/> con su campo <see cref="Book"/>.
         /// </summary>
         /// <returns>Una <see cref="IEnumerable{T}"/> de <see cref="Stock_Book"/> con los datos mencionados.</returns>
-        Task<IEnumerable<Stock_Book>> GetAllWithBookAllBookData();
+        Task<IEnumerable<Stock_Book>> GetAllWithAllDataAsync();
     }
 }
