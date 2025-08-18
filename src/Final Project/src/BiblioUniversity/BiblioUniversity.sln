@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.Infraestru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.Application", "BiblioUniversity.Application\BiblioUniversity.Application.csproj", "{7CB8C33A-44C7-4C41-903A-20497FDD9D11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.API", "BiblioUniversity.API\BiblioUniversity.API.csproj", "{CA6E145D-58BA-4051-82C9-BE175AC070BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioUniversity.Web", "BiblioUniversity.Web\BiblioUniversity.Web.csproj", "{CA2244E2-508E-4C6E-8CEF-5FFB1C06921B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{7CB8C33A-44C7-4C41-903A-20497FDD9D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CB8C33A-44C7-4C41-903A-20497FDD9D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CB8C33A-44C7-4C41-903A-20497FDD9D11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA6E145D-58BA-4051-82C9-BE175AC070BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2244E2-508E-4C6E-8CEF-5FFB1C06921B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2244E2-508E-4C6E-8CEF-5FFB1C06921B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2244E2-508E-4C6E-8CEF-5FFB1C06921B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2244E2-508E-4C6E-8CEF-5FFB1C06921B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

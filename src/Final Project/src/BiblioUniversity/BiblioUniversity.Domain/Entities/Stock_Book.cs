@@ -31,7 +31,7 @@ namespace BiblioUniversity.Domain.Entities
         public Stock_Book(int id, int bookId, int available, int existing, Book book)
         {
             if (existing < available)
-                throw new ExceptionEntity("Tienes mas libros disponibles que los de existencia, revise bien los datos");
+                throw new ExceptionDomain("Tienes mas libros disponibles que los de existencia, revise bien los datos");
 
             Id = id;
             BookId = bookId;
@@ -40,16 +40,15 @@ namespace BiblioUniversity.Domain.Entities
             Book = book;
         }
 
-        public Stock_Book(int id, int bookId, int available, int existing, int bookid)
+        public Stock_Book(int id, int bookId, int available, int existing)
         {
             if (existing < available)
-                throw new ExceptionEntity("Tienes mas libros disponibles que los de existencia, revise bien los datos");
+                throw new ExceptionDomain("Tienes mas libros disponibles que los de existencia, revise bien los datos");
 
             Id = id;
             BookId = bookId;
             Available = available;
             Existing = existing;
-            BookId = bookid;
         }
     }
 }

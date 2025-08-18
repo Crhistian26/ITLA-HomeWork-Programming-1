@@ -1,4 +1,5 @@
 ﻿using BiblioUniversity.Domain.Enum;
+using BiblioUniversity.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,9 +33,21 @@ namespace BiblioUniversity.Domain.Entities
 
         public Fine(int id, string description, Reservation reservation, int amaunt, Fine_status fine_Status)
         {
+            if (amaunt < 0)
+                throw new ExceptionDomain("No puedes poner una multa de 0 pesos.");
+
             Id = id;
             Description = description;
             Reservation = reservation;
+            Amaunt = amaunt;
+            Fine_Status = fine_Status;
+        }
+
+        public Fine(int id, string description, int reservationId, int amaunt, Fine_status fine_Status)
+        {
+            Id = id;
+            Description = description;
+            ReservationId = reservationId;
             Amaunt = amaunt;
             Fine_Status = fine_Status;
         }

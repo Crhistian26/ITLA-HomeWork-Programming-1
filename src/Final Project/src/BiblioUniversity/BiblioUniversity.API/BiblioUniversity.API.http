@@ -1,6 +1,0 @@
-@BiblioUniversity.API_HostAddress = http://localhost:5127
-
-GET {{BiblioUniversity.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

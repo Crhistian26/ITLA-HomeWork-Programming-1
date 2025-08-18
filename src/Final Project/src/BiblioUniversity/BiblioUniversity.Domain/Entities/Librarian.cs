@@ -22,8 +22,7 @@ namespace BiblioUniversity.Domain.Entities
 
         [Required]
         public string License { get; set; }
-           
-
+        
         public Librarian() { }
 
         public Librarian(int id, Person person, string license)
