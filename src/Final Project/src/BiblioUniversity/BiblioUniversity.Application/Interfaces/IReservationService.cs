@@ -13,6 +13,9 @@ namespace BiblioUniversity.Application.Interfaces
         Task<ReservationDTO> GetByIdWithStudentBookAsync(int id);
         Task<ReservationDTO> AddAsync(CreateReservationDTO dto);
         Task<ReservationDTO> UpdateAsync(ReservationDTO dto);
+
+        Task AcceptAsync(int id);
+        Task CanceledAsync(int id);
         Task DeleteAsync(int id);
     }
 }

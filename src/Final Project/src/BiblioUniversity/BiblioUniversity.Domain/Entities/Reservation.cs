@@ -1,4 +1,5 @@
-﻿using BiblioUniversity.Domain.Exceptions;
+﻿using BiblioUniversity.Domain.Enum;
+using BiblioUniversity.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +28,8 @@ namespace BiblioUniversity.Domain.Entities
 
         public string Description { get; set; }
 
+        public Reservation_status Status { get; set; }
+
         [Required]
         public DateTime Request_date { get; set; }
 
@@ -40,7 +43,7 @@ namespace BiblioUniversity.Domain.Entities
 
         public Reservation() { }
 
-        public Reservation(int id, int quantify, string description, DateTime request_date, DateTime withdrawal_date, DateTime? return_date, Student student, Book book)
+        public Reservation(int id, int quantify, string description, Reservation_status status, DateTime request_date, DateTime withdrawal_date, DateTime? return_date, Student student, Book book)
         {
             if (request_date > withdrawal_date)
                 throw new ExceptionDomain("El dia de la reservacion no puede ser despues del dia de retiro.");
@@ -48,6 +51,7 @@ namespace BiblioUniversity.Domain.Entities
             Id = id;
             Quantify = quantify;
             Description = description;
+            Status = status;
             Request_date = request_date;
             Withdrawal_date = withdrawal_date;
             Return_date = return_date;
@@ -55,7 +59,7 @@ namespace BiblioUniversity.Domain.Entities
             Book = book;
         }
 
-        public Reservation(int id, int studentid, int bookid, int quantify, string description, DateTime request_date, DateTime withdrawal_date, DateTime? return_date)
+        public Reservation(int id, int studentid, int bookid, int quantify, string description, Reservation_status status, DateTime request_date, DateTime withdrawal_date, DateTime? return_date)
         {
             if (request_date > withdrawal_date)
                 throw new ExceptionDomain("El dia de la reservacion no puede ser despues del dia de retiro.");
@@ -65,6 +69,7 @@ namespace BiblioUniversity.Domain.Entities
             BookId = bookid;
             Quantify = quantify;
             Description = description;
+            Status = status;
             Request_date = request_date;
             Withdrawal_date = withdrawal_date;
             Return_date = return_date;

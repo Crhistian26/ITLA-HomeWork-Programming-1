@@ -1,6 +1,6 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

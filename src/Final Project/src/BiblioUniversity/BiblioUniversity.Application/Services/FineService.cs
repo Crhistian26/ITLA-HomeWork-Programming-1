@@ -39,10 +39,12 @@ namespace BiblioUniversity.Application.Services
         public async Task<FineDTO> UpdateAsync(FineDTO dto)
         {
             var entity = await _repo.GetByIdAsync(dto.Id);
+
             entity.Description = dto.Description;
             entity.Amaunt = dto.Amaunt;
             entity.Fine_Status = dto.Fine_Status;
             entity.ReservationId = dto.ReservationId;
+
             var updated = await _repo.UpdateAsync(entity);
             return new FineDTO(updated);
         }

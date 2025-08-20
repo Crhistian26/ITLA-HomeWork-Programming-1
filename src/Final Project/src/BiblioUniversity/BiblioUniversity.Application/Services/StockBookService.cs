@@ -16,7 +16,7 @@ namespace BiblioUniversity.Application.Services
         public StockBookService(IStock_BooksRepository repo) => _repo = repo;
 
         public async Task<IEnumerable<StockBookDTO>> GetAllAsync()
-            => (await _repo.GetAllAsync()).Select(e => new StockBookDTO(e));
+            => (await _repo.GetAllWithAllDataAsync()).Select(e => new StockBookDTO(e));
 
         public async Task<StockBookDTO> GetByIdAsync(int id)
             => new StockBookDTO(await _repo.GetByIdAsync(id));

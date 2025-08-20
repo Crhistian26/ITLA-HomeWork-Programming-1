@@ -1,6 +1,6 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +25,9 @@ namespace BiblioUniversity.Infraestructure.Repositories
         public async Task<Reservation> AddAsync(Reservation entity)
         {
             _context.Reservations.AddAsync(entity);
+            var stock = _context.Stocks.Select(x => x).FirstOrDefault(x => x.BookId == entity.BookId);
+            stock.Available -= entity.Quantify;
+            _context.Stocks.Update(stock);
             _context.SaveChanges();
             return await _context.Reservations.FirstOrDefaultAsync(x => x.Id == entity.Id);
         }
@@ -52,6 +55,9 @@ namespace BiblioUniversity.Infraestructure.Repositories
             return await _context.Reservations
                 .Include(x => x.Book)
                 .Include(x => x.Student)
+                .ThenInclude(s => s.Person)
+                .Include(x=> x.Student)
+                .ThenInclude(s=> s.Enrollment)
                 .ToListAsync();
         }
 

@@ -37,7 +37,7 @@ namespace BiblioUniversity.Domain.Entities
         public ICollection<Language> Languages { get; set; }
 
         //Navegation
-        public Reservation Reservation { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
 
         public Book () 
         {
@@ -59,6 +59,34 @@ namespace BiblioUniversity.Domain.Entities
             if (autors != null)
             { 
                 foreach(Author author in autors)
+                    Authors.Add(author);
+            }
+
+            if (genres != null)
+            {
+                foreach (Genre genre in genres)
+                    Genres.Add(genre);
+            }
+
+            if (languages != null)
+            {
+                foreach (Language language in languages)
+                    Languages.Add(language);
+            }
+        }
+
+        public Book(string title, string edition, int pages, string url_image, string url_digital, List<Author> autors, List<Genre> genres, List<Language> languages)
+            : this()
+        {
+            Title = title;
+            Edition = edition;
+            Pages = pages;
+            Url_image = url_image;
+            Url_digital = url_digital;
+
+            if (autors != null)
+            {
+                foreach (Author author in autors)
                     Authors.Add(author);
             }
 

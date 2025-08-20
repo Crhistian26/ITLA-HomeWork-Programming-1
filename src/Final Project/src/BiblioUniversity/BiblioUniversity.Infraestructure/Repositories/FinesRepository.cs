@@ -1,6 +1,6 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,14 @@ namespace BiblioUniversity.Infraestructure.Repositories
         }
         public async Task<IEnumerable<Fine>> GetAllAsync()
         {
-            return await _context.Fines.ToListAsync();
+            return await _context.Fines
+                .Include(f=>f.Reservation)
+                .ThenInclude(r=>r.Student)
+                .ThenInclude(s=>s.Person)
+                .Include(f => f.Reservation)
+                .ThenInclude(r => r.Student)
+                .ThenInclude(s => s.Enrollment)
+                .ToListAsync();
         }
         public async Task<Fine> AddAsync(Fine entity)
         {

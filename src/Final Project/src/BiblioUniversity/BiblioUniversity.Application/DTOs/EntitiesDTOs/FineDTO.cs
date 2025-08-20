@@ -13,6 +13,7 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
         public int Id { get; set; }
         public string Description { get; set; }
         public int ReservationId { get; set; }
+        public Reservation Reservation { get; set; }
         public int Amaunt { get; set; }
         public Fine_status Fine_Status { get; set; }
 
@@ -23,6 +24,7 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
             Id = fine.Id;
             Description = fine.Description;
             ReservationId = fine.ReservationId;
+            Reservation = fine.Reservation;
             Amaunt = fine.Amaunt;
             Fine_Status = fine.Fine_Status;
         }

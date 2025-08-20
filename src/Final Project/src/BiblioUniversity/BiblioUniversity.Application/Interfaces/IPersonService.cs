@@ -12,5 +12,6 @@ namespace BiblioUniversity.Application.Interfaces
         Task<PersonDTO> AddAsync(CreatePersonDTO dto);
         Task<PersonDTO> UpdateAsync(PersonDTO dto);
         Task DeleteAsync(int id);
+        Task<bool> ConfirmIdCard(string idcard);
     }
 }

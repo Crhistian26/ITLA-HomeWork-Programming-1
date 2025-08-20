@@ -14,7 +14,7 @@ namespace BiblioUniversity.Application.DTOs.CreateDTOs
         public string Password { get; set; }
         public Rol Rol { get; set; }
         public int PersonId { get; set; }
-
+        public Person Person { get; set; }
         public CreateUserDTO() { }
 
         public CreateUserDTO(User user)
@@ -27,4 +27,4 @@ namespace BiblioUniversity.Application.DTOs.CreateDTOs
     }
 
 }
-}
+

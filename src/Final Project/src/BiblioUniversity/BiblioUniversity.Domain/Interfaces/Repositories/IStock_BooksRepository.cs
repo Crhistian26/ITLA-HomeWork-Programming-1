@@ -22,5 +22,7 @@ namespace BiblioUniversity.Domain.Interfaces.Repositories
         /// </summary>
         /// <returns>Una <see cref="IEnumerable{T}"/> de <see cref="Stock_Book"/> con los datos mencionados.</returns>
         Task<IEnumerable<Stock_Book>> GetAllWithAllDataAsync();
+
+        Task<Stock_Book> GetByBookId(int id);
     }
 }

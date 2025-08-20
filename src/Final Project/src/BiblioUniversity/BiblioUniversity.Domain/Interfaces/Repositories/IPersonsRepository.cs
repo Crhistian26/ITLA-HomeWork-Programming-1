@@ -1,5 +1,6 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories.BaseInterface;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace BiblioUniversity.Domain.Interfaces.Repositories
 {
     public interface IPersonsRepository : IBaseRepository<Person>
     {
-
+        public Task<bool> ConfirmIdCard(string idcard);
     }
 }

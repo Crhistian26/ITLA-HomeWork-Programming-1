@@ -24,7 +24,11 @@ namespace BiblioUniversity.Domain.Interfaces.Repositories
         /// <returns>Un <see cref="IEnumerable{Book}"/> de <see cref="Book"/> con los datos mencionados.</returns>
         Task<IEnumerable<Book>> GetAllWithAllDataAsync();
 
+        Task<IEnumerable<Language>> GetLanguages();
 
+        Task<IEnumerable<Genre>> GetGenres();
+
+        Task<IEnumerable<Author>> GetAuthors();
 
     }
 }

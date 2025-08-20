@@ -1,10 +1,11 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories;
 using BiblioUniversity.Domain.Interfaces.Repositories.BaseInterface;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,16 @@ namespace BiblioUniversity.Infraestructure.Repositories
         {
             _context.Persons.Remove(entity);
             _context.SaveChanges();
+        }
+
+        public async Task<bool> ConfirmIdCard(string idcard)
+        {
+            var v = _context.Persons.Select(x => x).Where(x => x.Id_Card.Trim() == idcard.Trim());
+            if(v == null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

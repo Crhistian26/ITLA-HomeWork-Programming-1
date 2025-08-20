@@ -1,5 +1,6 @@
 using BiblioUniversity.Application.DTOs.CreateDTOs;
 using BiblioUniversity.Application.DTOs.EntitiesDTOs;
+using BiblioUniversity.Domain.Entities.DataOnly;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +15,11 @@ namespace BiblioUniversity.Application.Interfaces
         Task<BookDTO> AddAsync(CreateBookDTO dto);
         Task<BookDTO> UpdateAsync(BookDTO dto);
         Task DeleteAsync(int id);
+
+        Task<IEnumerable<Language>> GetLanguages();
+
+        Task<IEnumerable<Genre>> GetGenres();
+
+        Task<IEnumerable<Author>> GetAuthors();
     }
 }

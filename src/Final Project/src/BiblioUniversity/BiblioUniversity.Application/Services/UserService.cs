@@ -25,7 +25,6 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = new User
             (
-                0,
                 dto.Username,
                 dto.Password,
                 dto.Rol,
@@ -56,7 +55,15 @@ namespace BiblioUniversity.Application.Services
         }
 
         public async Task<UserDTO> LoginAsync(string username, string password)
-            => new UserDTO(await _repo.LoginAsync(username, password));
+        {
+            var v = await _repo.LoginAsync(username, password);
+            if(v == null)
+            {
+                return null;
+            }
+
+            return new UserDTO(v);
+        }
 
         public async Task<bool> ConfirmUserExistsAsync(string username)
             => _repo.ConfirmUserExists(username);

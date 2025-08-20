@@ -11,6 +11,7 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
     {
         public int Id { get; set; }
         public int BookId { get; set; }
+        public Book Book { get; set; }
         public int Available { get; set; }
         public int Existing { get; set; }
 
@@ -20,6 +21,7 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
         {
             Id = stock.Id;
             BookId = stock.BookId;
+            Book = stock.Book;
             Available = stock.Available;
             Existing = stock.Existing;
         }

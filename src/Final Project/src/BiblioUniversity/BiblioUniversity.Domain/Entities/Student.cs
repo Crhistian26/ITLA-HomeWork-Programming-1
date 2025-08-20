@@ -24,12 +24,16 @@ namespace BiblioUniversity.Domain.Entities
         [Required]
         public int EnrollmentId { get; set; }
         public Enrollment Enrollment { get; set; }
-       
 
         //Navegation
-        public Reservation Reservation { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
 
         public Student() { }
+        public Student(Person person, Enrollment enrollment)
+        {
+            Person = person;
+            Enrollment = enrollment;
+        }
 
         public Student(int id, Person person, Enrollment enrollment)
         { 
@@ -45,5 +49,10 @@ namespace BiblioUniversity.Domain.Entities
             EnrollmentId = enrollmentid;
         }
 
+        public Student(int personid, int enrollmentid)
+        {
+            PersonId = personid;
+            EnrollmentId = enrollmentid;
+        }
     }
 }

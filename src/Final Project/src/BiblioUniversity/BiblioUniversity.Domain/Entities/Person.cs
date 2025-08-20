@@ -23,7 +23,7 @@ namespace BiblioUniversity.Domain.Entities
         [Required]
         public string Telephone { get; set; }
         [Required]
-        [StringLength(11)]
+        [StringLength(15)]
         public string Id_Card { get; set; }
         [Required]
         public string Address { get; set; }
@@ -35,14 +35,19 @@ namespace BiblioUniversity.Domain.Entities
 
 
         public Person() { }
-        public Person(int id,string name, string lastname, string telephone, string id_Card, string address)
+
+        public Person( string name, string lastname, string telephone, string id_Card, string address)
         {
-            Id = id;
             Name = name;
             Lastname = lastname;
             Telephone = telephone;
             Id_Card = id_Card;
             Address = address;
+        }
+        public Person(int id,string name, string lastname, string telephone, string id_Card, string address) : this( name,  lastname,  telephone,  id_Card,  address)
+        {
+            Id = id;
+
         }
     }
 }

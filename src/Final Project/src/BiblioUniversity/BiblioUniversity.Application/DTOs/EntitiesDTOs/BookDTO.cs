@@ -1,4 +1,5 @@
 ﻿using BiblioUniversity.Domain.Entities;
+using BiblioUniversity.Domain.Entities.DataOnly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,12 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
         public string Title { get; set; }
         public string Edition { get; set; }
         public int Pages { get; set; }
-        public string Url_image { get; set; }
-        public string Url_digital { get; set; }
+        public string? Url_image { get; set; }
+        public string? Url_digital { get; set; }
 
-        public List<int> AuthorIds { get; set; }
-        public List<int> GenreIds { get; set; }
-        public List<int> LanguageIds { get; set; }
-        public int? ReservationId { get; set; }
+        public List<Author> Authors { get; set; }
+        public List<Genre> Genres { get; set; }
+        public List<Language> Language { get; set; }
 
         public BookDTO() { }
 
@@ -31,10 +31,9 @@ namespace BiblioUniversity.Application.DTOs.EntitiesDTOs
             Pages = book.Pages;
             Url_image = book.Url_image;
             Url_digital = book.Url_digital;
-            AuthorIds = book.Authors?.Select(a => a.Id).ToList();
-            GenreIds = book.Genres?.Select(g => g.Id).ToList();
-            LanguageIds = book.Languages?.Select(l => l.Id).ToList();
-            ReservationId = book.Reservation?.Id;
+            Authors = book.Authors.ToList();
+            Genres = book.Genres.ToList();
+            Language = book.Languages.ToList();
         }
     }
 }

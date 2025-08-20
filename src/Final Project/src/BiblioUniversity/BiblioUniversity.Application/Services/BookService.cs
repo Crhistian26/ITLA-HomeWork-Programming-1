@@ -32,18 +32,15 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = new Book
             (
-                0,
                 dto.Title,
                 dto.Edition,
                 dto.Pages,
                 dto.Url_image,
                 dto.Url_digital,
-
-                dto.AuthorIds?.Select(id => new Author{ Id = id }).ToList(),
+                dto.Authors,
+                dto.Genres,
                 
-                dto.GenreIds?.Select(id => new Genre { Id = id }).ToList(),
-                
-                dto.LanguageIds?.Select(id => new Language { Id = id }).ToList()
+                dto.Languages
                 
             );
 
@@ -69,6 +66,21 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = await _repo.GetByIdAsync(id);
             await _repo.DeleteAsync(entity);
+        }
+
+        public async Task<IEnumerable<Language>> GetLanguages()
+        {
+            return await _repo.GetLanguages();
+        }
+
+        public async Task<IEnumerable<Genre>> GetGenres()
+        {
+            return await _repo.GetGenres();
+        }
+
+        public async Task<IEnumerable<Author>> GetAuthors()
+        {
+            return await _repo.GetAuthors();
         }
     }
 }

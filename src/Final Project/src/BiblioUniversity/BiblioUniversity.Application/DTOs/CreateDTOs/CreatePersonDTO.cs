@@ -1,4 +1,5 @@
-﻿using BiblioUniversity.Domain.Entities;
+﻿using BiblioUniversity.Application.DTOs.EntitiesDTOs;
+using BiblioUniversity.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace BiblioUniversity.Application.DTOs.CreateDTOs
 
         public CreatePersonDTO() { }
 
+        public CreatePersonDTO(PersonDTO person)
+        {
+            Name = person.Name;
+            Lastname = person.Lastname;
+            Telephone = person.Telephone;
+            Id_Card = person.Id_Card;
+            Address = person.Address;
+        }
         public CreatePersonDTO(Person person)
         {
             Name = person.Name;

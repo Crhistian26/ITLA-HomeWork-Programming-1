@@ -46,5 +46,12 @@ namespace BiblioUniversity.Domain.Entities
             Rol = rol;
             PersonId = personid;
         }
+        public User(string username, string password, Rol rol, int personid)
+        {
+            Username = username;
+            Password = password;
+            Rol = rol;
+            PersonId = personid;
+        }
     }
 }

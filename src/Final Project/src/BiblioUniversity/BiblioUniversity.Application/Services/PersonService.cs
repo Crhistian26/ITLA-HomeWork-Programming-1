@@ -25,13 +25,16 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = new Person
             (   
-                0,
                 dto.Name,
                 dto.Lastname,
                 dto.Telephone,
                 dto.Id_Card,
                 dto.Address
             );
+            if (await _repo.ConfirmIdCard(dto.Id_Card))
+            {
+                throw new Exception("Ya existe una persona con esta cédula.");
+            }
 
             var added = await _repo.AddAsync(entity);
             return new PersonDTO(added);
@@ -55,6 +58,11 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = await _repo.GetByIdAsync(id);
             await _repo.DeleteAsync(entity);
+        }
+
+        public async Task<bool> ConfirmIdCard(string idcard)
+        {
+            return await _repo.ConfirmIdCard(idcard);
         }
     }
 }

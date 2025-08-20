@@ -1,6 +1,6 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Interfaces.Repositories;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace BiblioUniversity.Infraestructure.Repositories
         {
             _context.Students.AddAsync(entity);
             _context.SaveChanges();
-            return await _context.Students.FirstOrDefaultAsync(x=>x.Id == entity.Id);
+            return entity;
         }
         public async Task<Student> UpdateAsync(Student entity)
         {

@@ -1,7 +1,7 @@
 ﻿using BiblioUniversity.Domain.Entities;
 using BiblioUniversity.Domain.Enum;
 using BiblioUniversity.Domain.Interfaces.Repositories;
-using BiblioUniversity.Infraestructure.DBContext;
+using BiblioUniversity.Infraestructure.BaseDatosContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
@@ -63,11 +63,6 @@ namespace BiblioUniversity.Infraestructure.Repositories
         {
             _context.Users.Add(user);
             _context.SaveChanges();
-
-            user = await _context.Users.Select(x => x)
-                .Where(x => x.Id == user.Id)
-                .FirstOrDefaultAsync();
-
             return user;
         }
 

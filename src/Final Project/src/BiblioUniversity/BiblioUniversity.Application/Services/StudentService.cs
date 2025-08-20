@@ -25,7 +25,6 @@ namespace BiblioUniversity.Application.Services
         {
             var entity = new Student
             (
-                0,
                 dto.PersonId,
                 dto.EnrollmentId
             );
