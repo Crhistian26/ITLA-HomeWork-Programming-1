@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BiblioUniversity.Infraestructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Ultimate : Migration
+    public partial class FinalMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -91,7 +91,7 @@ namespace BiblioUniversity.Infraestructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Lastname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Telephone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id_Card = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Id_Card = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -519,14 +519,12 @@ namespace BiblioUniversity.Infraestructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_BookId",
                 table: "Reservations",
-                column: "BookId",
-                unique: true);
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_StudentId",
                 table: "Reservations",
-                column: "StudentId",
-                unique: true);
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stocks_BookId",

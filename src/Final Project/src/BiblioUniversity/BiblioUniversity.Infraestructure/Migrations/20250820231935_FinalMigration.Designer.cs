@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiblioUniversity.Infraestructure.Migrations
 {
     [DbContext(typeof(BiblioContext))]
-    [Migration("20250820185043_Ultimate")]
-    partial class Ultimate
+    [Migration("20250820231935_FinalMigration")]
+    partial class FinalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -361,8 +361,8 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.Property<string>("Id_Card")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -486,11 +486,9 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId")
-                        .IsUnique();
+                    b.HasIndex("BookId");
 
-                    b.HasIndex("StudentId")
-                        .IsUnique();
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Reservations");
                 });
@@ -803,14 +801,14 @@ namespace BiblioUniversity.Infraestructure.Migrations
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Reservation", b =>
                 {
                     b.HasOne("BiblioUniversity.Domain.Entities.Book", "Book")
-                        .WithOne("Reservation")
-                        .HasForeignKey("BiblioUniversity.Domain.Entities.Reservation", "BookId")
+                        .WithMany("Reservations")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BiblioUniversity.Domain.Entities.Student", "Student")
-                        .WithOne("Reservation")
-                        .HasForeignKey("BiblioUniversity.Domain.Entities.Reservation", "StudentId")
+                        .WithMany("Reservations")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -892,8 +890,7 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Book", b =>
                 {
-                    b.Navigation("Reservation")
-                        .IsRequired();
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.DataOnly.Enrollment", b =>
@@ -922,8 +919,7 @@ namespace BiblioUniversity.Infraestructure.Migrations
 
             modelBuilder.Entity("BiblioUniversity.Domain.Entities.Student", b =>
                 {
-                    b.Navigation("Reservation")
-                        .IsRequired();
+                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }
